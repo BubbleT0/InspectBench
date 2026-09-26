@@ -123,12 +123,18 @@ get 0, clean images get 1 — always read together with the failure count).
 
 ```
 annotations/            5 anonymized JSONL subset files (1,039 rows total)
-images/                 1,039 benchmark images (IMG_0001..IMG_1039)
 scorer/
   bbox_scorer.py        standalone scorer (stdlib only)
   prepare_annotations.py  converts the anonymized format to scorer input
   README_SCORER.md      complete metric documentation
 ```
+
+The 1,039 benchmark images (`images/IMG_0001..IMG_1039`, ~2.9 GB) are **not
+stored in the git tree**. Download them from the repository's
+[Releases](../../releases) page: grab `InspectBench_images_part1.zip` and
+`InspectBench_images_part2.zip` and extract both archives into the repository
+root — they will create the `images/` directory with all files. Image
+metadata (EXIF, JPEG comments) has been stripped for anonymization.
 
 ## License / usage
 
