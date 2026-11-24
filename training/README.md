@@ -11,7 +11,7 @@ This directory connects the six paper checkpoints to recovered source files and 
 | Decision-SFT-Balanced+ | decision_balanced | 444 | 1 | 8,192 | 1e-6 | 8 | 2 / 4 / 1 / 2 |
 | Decision-SFT-Pool+ | decision_pool | 688 | 1 | 8,192 | 1e-6 | 8 | 2 / 4 / 1 / 2 |
 
-These are recovered values from `checkpoints/<key>/args.json`, not values inferred from directory names. All have micro-batch size 1. `checkpoints.json` provides a compact machine-readable index. Checkpoint directories also contain model/processor configuration and the chat template, without model weights or tokenizers' large vocabulary files.
+These are recovered values from `checkpoints/<key>/args.json`, not values inferred from directory names. All have micro-batch size 1. `checkpoints.json` provides a compact machine-readable index. Checkpoint directories also contain model/processor configuration and the chat template, with full inference weights and tokenizer files linked in [MODELS.md](MODELS.md).
 
 ## Source map
 
@@ -30,7 +30,7 @@ The scripts are historical training artifacts, not a turnkey installer. Infrastr
 
 The saved framework version is `4.2.0.dev0`. The Decision/expanded training dependency lock records ms-swift commit `b8241e85781b8f8c8f3f4b1019082657aef14603`, Megatron-LM commit `31e3277683dbf06cff4732cbc0033573437d1097`, and mcore-bridge commit `c527134caa372e85e8dbf75127d4df02b088bd44`. A commit identifier alone does not establish that a historical fork or all local modifications are publicly retrievable. Framework availability, GPU topology and data access remain required for rerunning training.
 
-Raw training conversations, source images, model weights, optimizer states and caches are not included in this code release. A hashed split manifest is not a replacement for those inputs. `image_identity_sha256` hashes the resolved source identity and is not an image-content hash; `file_sha256` is included only where independently cached content fingerprints are available.
+Full inference weights are uploaded separately to Hugging Face; see [MODELS.md](MODELS.md). Raw training conversations, source images, optimizer states and caches are not included in this release. A hashed split manifest is not a replacement for those inputs. `image_identity_sha256` hashes the resolved source identity and is not an image-content hash; `file_sha256` is included only where independently cached content fingerprints are available.
 
 ## Label and evaluation scope
 

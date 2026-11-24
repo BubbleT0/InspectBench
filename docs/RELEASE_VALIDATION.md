@@ -16,4 +16,10 @@ Validation uses saved predictions and local files; no model training or inferenc
 
 Six checkpoint argument snapshots and training split manifests were recovered. Training jobs and dependency installation on the original GPU topology were not reproduced. Those artifacts retain documented environment and data requirements.
 
-Packaging changes are limited to public-ID alignment, credential/path sanitization, documentation, download/validation utilities, removal of CLI entry points for modules absent from the core-only snapshot, and image-header MIME detection in the inspection manifest for historically mismatched filename extensions. Scoring formulas and model outputs are unchanged.
+Packaging changes are limited to public-ID alignment, credential/path sanitization, documentation, download/validation utilities, removal of CLI entry points for modules absent from the core-only snapshot, image-header MIME detection in both pipeline manifests for historically mismatched filename extensions, and the launcher that restores archived paper harness settings. Scoring formulas and model outputs are unchanged.
+
+## Model weights and paper harness update
+
+- Six checkpoints: 72 original safetensors shards, with tensor shapes, offsets, shard-index coverage and total tensor bytes checked. All remote weight-shard SHA-256 values matched the staged source files.
+- The launcher regression check covers all six archived checkpoint/procedure pairings, including derived routing flags. Full-Seq manifest tests also verify a PNG stored under a historical `.jpg` filename. Six test functions and six parameter subtests passed for these checks.
+- No model training or GPU inference was run for publication; historical saved scores and the paper figures are unchanged.

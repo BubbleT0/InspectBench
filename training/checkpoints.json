@@ -30,7 +30,14 @@
       "save_steps": 15,
       "eval_steps": 2000000000
     },
-    "scope": "Recorded checkpoint arguments; private locations and credentials removed. No weights included."
+    "scope": "Recorded checkpoint arguments; infrastructure paths and credentials removed. Full inference weights are linked in weights.",
+    "weights": {
+      "repo_id": "BubbleT0/InspectBench-Workflow-SFT",
+      "url": "https://huggingface.co/BubbleT0/InspectBench-Workflow-SFT",
+      "commit": "2cbd9cb0d1f77973f1123df6f94c399555bad8eb",
+      "private": false,
+      "verified_weight_shards": 12
+    }
   },
   {
     "key": "trajectory_r1",
@@ -63,7 +70,14 @@
       "save_steps": 250,
       "eval_steps": 250
     },
-    "scope": "Recorded checkpoint arguments; private locations and credentials removed. No weights included."
+    "scope": "Recorded checkpoint arguments; infrastructure paths and credentials removed. Full inference weights are linked in weights.",
+    "weights": {
+      "repo_id": "BubbleT0/InspectBench-Trajectory-SFT-R1",
+      "url": "https://huggingface.co/BubbleT0/InspectBench-Trajectory-SFT-R1",
+      "commit": "bdac629496cd3e3776e40c95dfe89a5fa5ef7718",
+      "private": false,
+      "verified_weight_shards": 12
+    }
   },
   {
     "key": "trajectory_r2",
@@ -96,7 +110,14 @@
       "save_steps": 500,
       "eval_steps": 2000000000
     },
-    "scope": "Recorded checkpoint arguments; private locations and credentials removed. No weights included."
+    "scope": "Recorded checkpoint arguments; infrastructure paths and credentials removed. Full inference weights are linked in weights.",
+    "weights": {
+      "repo_id": "BubbleT0/InspectBench-Trajectory-SFT-R2",
+      "url": "https://huggingface.co/BubbleT0/InspectBench-Trajectory-SFT-R2",
+      "commit": "3f29c7b5a13998978f5d8af4ed3fc9bc7a058c19",
+      "private": false,
+      "verified_weight_shards": 12
+    }
   },
   {
     "key": "decision_sft",
@@ -129,7 +150,14 @@
       "save_steps": 50,
       "eval_steps": 50
     },
-    "scope": "Recorded checkpoint arguments; private locations and credentials removed. No weights included."
+    "scope": "Recorded checkpoint arguments; infrastructure paths and credentials removed. Full inference weights are linked in weights.",
+    "weights": {
+      "repo_id": "BubbleT0/InspectBench-Decision-SFT",
+      "url": "https://huggingface.co/BubbleT0/InspectBench-Decision-SFT",
+      "commit": "e735d2dd4fba0e3f44a35532d749bb2f4d6d8c33",
+      "private": false,
+      "verified_weight_shards": 12
+    }
   },
   {
     "key": "decision_balanced",
@@ -162,7 +190,14 @@
       "save_steps": 200,
       "eval_steps": 200
     },
-    "scope": "Recorded checkpoint arguments; private locations and credentials removed. No weights included."
+    "scope": "Recorded checkpoint arguments; infrastructure paths and credentials removed. Full inference weights are linked in weights.",
+    "weights": {
+      "repo_id": "BubbleT0/InspectBench-Decision-SFT-BalancedPlus",
+      "url": "https://huggingface.co/BubbleT0/InspectBench-Decision-SFT-BalancedPlus",
+      "commit": "98148ee8d98c6fcc9bf441ea0047a29c1ed29b44",
+      "private": false,
+      "verified_weight_shards": 12
+    }
   },
   {
     "key": "decision_pool",
@@ -195,6 +230,13 @@
       "save_steps": 200,
       "eval_steps": 200
     },
-    "scope": "Recorded checkpoint arguments; private locations and credentials removed. No weights included."
+    "scope": "Recorded checkpoint arguments; infrastructure paths and credentials removed. Full inference weights are linked in weights.",
+    "weights": {
+      "repo_id": "BubbleT0/InspectBench-Decision-SFT-PoolPlus",
+      "url": "https://huggingface.co/BubbleT0/InspectBench-Decision-SFT-PoolPlus",
+      "commit": "f3fbe37b382faadd3db0fab74bfb0cea01f80433",
+      "private": false,
+      "verified_weight_shards": 12
+    }
   }
 ]
