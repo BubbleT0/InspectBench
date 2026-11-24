@@ -1,0 +1,63 @@
+{
+  "workflow_sft": {
+    "repo_id": "BubbleT0/InspectBench-Workflow-SFT-Data",
+    "url": "https://huggingface.co/datasets/BubbleT0/InspectBench-Workflow-SFT-Data",
+    "commit": "86e0f33eaefc82364b9b6380acc7cd13f550bf79",
+    "private": false,
+    "verified_files": 33,
+    "bytes": 930567369,
+    "unauthenticated_access_verified": true,
+    "statistics": {
+      "dataset": "workflow_sft",
+      "train_records": 8834,
+      "effective_train_records": 12312,
+      "shards": 27,
+      "changed_records": 1374,
+      "redactions": {
+        "internal_account_name": 30638,
+        "jwt": 19,
+        "credential_assignment": 27,
+        "credential_token": 6
+      },
+      "external_images_in_model_input": 0,
+      "scope": "Complete saved text SFT inputs. Tool-output paths/URLs inside messages are text, not bundled original workflow project assets."
+    },
+    "status": "uploaded_and_verified"
+  },
+  "decision_sft": {
+    "repo_id": "BubbleT0/InspectBench-Decision-SFT-Data",
+    "url": "https://huggingface.co/datasets/BubbleT0/InspectBench-Decision-SFT-Data",
+    "commit": "573c77df0b86cbe2327ba901af6b27189e9ea66c",
+    "private": false,
+    "verified_files": 3610,
+    "bytes": 3292390686,
+    "unauthenticated_access_verified": true,
+    "statistics": {
+      "dataset": "decision_sft",
+      "splits": {
+        "train": {
+          "records": 4000,
+          "available_images": 3000,
+          "missing_images": 1000
+        },
+        "validation": {
+          "records": 800,
+          "available_images": 600,
+          "missing_images": 200
+        }
+      },
+      "decoded_pixels_preserved": 3600,
+      "image_bytes": 3274584322,
+      "messages_unchanged": true,
+      "missing_source": "Wikimedia",
+      "source_formats": {
+        "PNG": 253,
+        "JPEG": 3328,
+        "WEBP": 16,
+        "GIF": 3
+      },
+      "primary_frame_exports": 2
+    },
+    "status": "uploaded_and_verified"
+  }
+}

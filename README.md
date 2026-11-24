@@ -4,7 +4,7 @@ InspectBench evaluates **image-only defect coverage and false-positive restraint
 
 The frozen paper benchmark contains **1,039 images, 718 flawed images, 321 clean controls and 1,983 reference regions**. This repository collects evaluation and inference code, the available inspection-pipeline implementations, recorded training configurations and data-preparation scripts, and all 17 saved prediction sets. The pixel-preserving benchmark images and annotations are available on [Hugging Face](https://huggingface.co/datasets/BubbleT0/InspectBench). The original GitHub v1.0 image assets remain available in [Releases](https://github.com/BubbleT0/InspectBench/releases/tag/v1.0).
 
-The model repositories are public; the benchmark dataset currently requires an authorized Hugging Face account.
+The model repositories and the [Workflow-SFT / Decision-SFT training datasets](training/DATASETS.md) are public. The benchmark dataset currently requires an authorized Hugging Face account. Decision-SFT retains all 4,800 records, but 1,200 original Wikimedia images are unavailable; its data card documents the missing inputs.
 
 ## Contents
 
@@ -81,7 +81,7 @@ python -m vlm_judge_bench run \
 
 Set the endpoint and served model name in the example configuration before running it. Credentials are read from environment variables. `pipelines/README.md` describes the saved procedures and provides `pipelines/run_paper_pipeline.py` to launch all six paper pairings with validated archived settings. `training/README.md` connects the six checkpoint snapshots to their data preparation and training files.
 
-Recorded training arguments are provided as evidence of the actual checkpoint settings. Training scripts retain framework and hardware assumptions; private infrastructure locations have been replaced with `/path/to/...` placeholders. The six original paper checkpoint weights are available in the [model release index](training/MODELS.md), with pinned Hugging Face revisions and verified shard hashes. Raw training conversations/images are not included. It does not claim that copying a configuration recreates the historical training environment or proprietary model endpoints.
+Recorded training arguments are provided as evidence of the actual checkpoint settings. Training scripts retain framework and hardware assumptions; private infrastructure locations have been replaced with `/path/to/...` placeholders. The six original paper checkpoint weights are available in the [model release index](training/MODELS.md), with pinned Hugging Face revisions and verified shard hashes. The [training dataset index](training/DATASETS.md) links the recovered Workflow-SFT and Decision-SFT inputs, release transformations and missing-image records. Copying a configuration does not recreate the historical training environment or proprietary model endpoints.
 
 ## Interpretation and usage
 

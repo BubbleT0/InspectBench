@@ -30,7 +30,7 @@ The scripts are historical training artifacts, not a turnkey installer. Infrastr
 
 The saved framework version is `4.2.0.dev0`. The Decision/expanded training dependency lock records ms-swift commit `b8241e85781b8f8c8f3f4b1019082657aef14603`, Megatron-LM commit `31e3277683dbf06cff4732cbc0033573437d1097`, and mcore-bridge commit `c527134caa372e85e8dbf75127d4df02b088bd44`. A commit identifier alone does not establish that a historical fork or all local modifications are publicly retrievable. Framework availability, GPU topology and data access remain required for rerunning training.
 
-Full inference weights are uploaded separately to Hugging Face; see [MODELS.md](MODELS.md). Raw training conversations, source images, optimizer states and caches are not included in this release. A hashed split manifest is not a replacement for those inputs. `image_identity_sha256` hashes the resolved source identity and is not an image-content hash; `file_sha256` is included only where independently cached content fingerprints are available.
+Full inference weights are uploaded separately to Hugging Face; see [MODELS.md](MODELS.md). Recovered Workflow-SFT conversations and Decision-SFT conversations/images are public on Hugging Face; see [DATASETS.md](DATASETS.md) for pinned versions, transformations, 1,200 missing Decision-SFT images and the preparation helper. Raw inputs for the other four checkpoints, optimizer states and caches are not included. A hashed split manifest is not a replacement for missing inputs. `image_identity_sha256` hashes the resolved source identity and is not an image-content hash; `file_sha256` is included only where independently cached content fingerprints are available.
 
 ## Label and evaluation scope
 
