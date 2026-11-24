@@ -1,0 +1,206 @@
+{
+  "definition": "Maximum S credit from replacing failed clean-image zero scores by empty-set scores of one, with fixed denominators and all other contributions unchanged.",
+  "formula": "100*((1-lambda)^2*d + 2*lambda*(1-lambda)*sqrt(Qplus)*(sqrt(Qminus)-sqrt(Qminus-d)))",
+  "d": "min(failed_image_outputs/321, Qminus)",
+  "component_half_rounding_unit": "0.00005",
+  "bound_rounding": "upward to 0.001 S points",
+  "all_failures_clean_worst_case": true,
+  "measured_scores_changed": false,
+  "formula_subtraction_checks": 17,
+  "rounding_and_failure_count_corner_checks": 450,
+  "configurations": [
+    {
+      "model": "Qwen3.6-27B",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.2115",
+      "clean_component": "0.2899",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Qwen3.8-27B",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.1877",
+      "clean_component": "0.3837",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Qwen3.7-Plus",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.1588",
+      "clean_component": "0.3006",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "GPT-5.6-sol",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.0575",
+      "clean_component": "0.8839",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Gemini-3.5-Flash",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.0539",
+      "clean_component": "0.6447",
+      "bound_from_rounded_components": "0E-101",
+      "rounding_safe_upper_bound": "0E-101",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Workflow-SFT",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.1616",
+      "clean_component": "0.7087",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Trajectory-SFT-R1",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.2157",
+      "clean_component": "0.3219",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Trajectory-SFT-R2",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.2149",
+      "clean_component": "0.3581",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Decision-SFT",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.1421",
+      "clean_component": "0.9192",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Decision-SFT-Balanced+",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.0642",
+      "clean_component": "0.9724",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Decision-SFT-Pool+",
+      "procedure": "Direct",
+      "failed_image_outputs": 0,
+      "positive_component": "0.0401",
+      "clean_component": "0.9842",
+      "bound_from_rounded_components": "0E-101",
+      "rounding_safe_upper_bound": "0E-101",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Workflow-SFT",
+      "procedure": "Full-Seq",
+      "failed_image_outputs": 22,
+      "positive_component": "0.2071",
+      "clean_component": "0.6566",
+      "bound_from_rounded_components": "1.4474009233049972479751583526819552350945012854417",
+      "rounding_safe_upper_bound": "1.4475346025465129819646034088660609463326315585783",
+      "published_upper_bound": "1.448"
+    },
+    {
+      "model": "Workflow-SFT",
+      "procedure": "Conservative",
+      "failed_image_outputs": 7,
+      "positive_component": "0.1435",
+      "clean_component": "0.8156",
+      "bound_from_rounded_components": "0.38965084999506715428059145750773393382559988142967",
+      "rounding_safe_upper_bound": "0.38969054857127608487171090476993119617516143060617",
+      "published_upper_bound": "0.390"
+    },
+    {
+      "model": "Workflow-SFT",
+      "procedure": "Full-Sched",
+      "failed_image_outputs": 1,
+      "positive_component": "0.2017",
+      "clean_component": "0.6965",
+      "bound_from_rounded_components": "0.063282024029332217786791950813189058901670535995277",
+      "rounding_safe_upper_bound": "0.063287660333668284713357605032386800334086768140122",
+      "published_upper_bound": "0.064"
+    },
+    {
+      "model": "Workflow-SFT",
+      "procedure": "Selective",
+      "failed_image_outputs": 0,
+      "positive_component": "0.1864",
+      "clean_component": "0.6404",
+      "bound_from_rounded_components": "0E-100",
+      "rounding_safe_upper_bound": "0E-100",
+      "published_upper_bound": "0.000"
+    },
+    {
+      "model": "Trajectory-SFT-R2",
+      "procedure": "Selective",
+      "failed_image_outputs": 2,
+      "positive_component": "0.1876",
+      "clean_component": "0.6183",
+      "bound_from_rounded_components": "0.12832833330551640215849496363299037060314178997335",
+      "rounding_safe_upper_bound": "0.12834089820048303731433237966189324669521301841467",
+      "published_upper_bound": "0.129"
+    },
+    {
+      "model": "Decision-SFT",
+      "procedure": "Selective",
+      "failed_image_outputs": 1,
+      "positive_component": "0.1729",
+      "clean_component": "0.806",
+      "bound_from_rounded_components": "0.058366830379152983450398215016659893692004076215951",
+      "rounding_safe_upper_bound": "0.058372158208371489020850452665735623349672720025438",
+      "published_upper_bound": "0.059"
+    }
+  ],
+  "top3_adjacent_score_gaps": [
+    "0.346",
+    "0.146"
+  ],
+  "top3_max_score_gap": "0.492",
+  "high_sensitivity_clean_fpr_range_pct": [
+    80.06,
+    95.64
+  ],
+  "small_recall_checkpoints": [
+    {
+      "model": "Decision-SFT-Balanced+",
+      "procedure": "Direct",
+      "recall_01": 0.0857,
+      "image_fnr": 0.6922
+    },
+    {
+      "model": "Decision-SFT-Pool+",
+      "procedure": "Direct",
+      "recall_01": 0.0514,
+      "image_fnr": 0.8064
+    }
+  ]
+}

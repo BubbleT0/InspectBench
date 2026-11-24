@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlm-judge-bench"
+version = "0.1.0"
+description = "BBox-only benchmark for visual anomaly judges"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.28",
+  "numpy>=2.0",
+  "Pillow>=11",
+  "PyYAML>=6",
+  "tqdm>=4.67",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=9"]
+
+[project.scripts]
+vlm-judge-bench = "vlm_judge_bench.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["vlm_judge_bench*"]

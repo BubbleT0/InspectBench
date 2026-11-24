@@ -1,0 +1,203 @@
+[
+  {
+    "configuration": "Qwen3.6-27B / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 600,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Workflow-SFT / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 600,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Workflow-SFT / Full-Seq",
+    "settings": {},
+    "scope": "stored runner configuration; pipeline internal calls require their own implementation",
+    "available": false
+  },
+  {
+    "configuration": "Workflow-SFT / Conservative",
+    "settings": {},
+    "scope": "stored runner configuration; pipeline internal calls require their own implementation",
+    "available": false
+  },
+  {
+    "configuration": "Workflow-SFT / Full-Sched",
+    "settings": {},
+    "scope": "stored runner configuration; pipeline internal calls require their own implementation",
+    "available": false
+  },
+  {
+    "configuration": "Workflow-SFT / Selective",
+    "settings": {},
+    "scope": "stored runner configuration; pipeline internal calls require their own implementation",
+    "available": false
+  },
+  {
+    "configuration": "Trajectory-SFT-R2 / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 600,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Trajectory-SFT-R2 / Selective",
+    "settings": {},
+    "scope": "stored runner configuration; pipeline internal calls require their own implementation",
+    "available": false
+  },
+  {
+    "configuration": "Trajectory-SFT-R1 / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 600,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Decision-SFT / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 600,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Decision-SFT / Selective",
+    "settings": {},
+    "scope": "stored runner configuration; pipeline internal calls require their own implementation",
+    "available": false
+  },
+  {
+    "configuration": "Decision-SFT-Balanced+ / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 900,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Decision-SFT-Pool+ / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 900,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Qwen3.8-27B / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 600,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Qwen3.7-Plus / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 360,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "GPT-5.6-sol / Direct",
+    "settings": {
+      "adapter": "openai_chat",
+      "timeout_seconds": 600,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": 2048,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  },
+  {
+    "configuration": "Gemini-3.5-Flash / Direct",
+    "settings": {
+      "adapter": "gemini_generate_content",
+      "timeout_seconds": 360,
+      "max_retries": 3,
+      "max_tokens": 32768,
+      "temperature": 0,
+      "rps": 0.0,
+      "image_max_side": null,
+      "image_jpeg_quality": 95
+    },
+    "scope": "stored direct runner configuration",
+    "available": true
+  }
+]

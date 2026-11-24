@@ -1,0 +1,16 @@
+<image>
+Inspect the complete image for qualifying localized visual anomalies. Check local rendering corruption, malformed or missing entity parts, topology/connectivity errors, relational or physical impossibilities, and visibly malformed text glyphs. Do not report ordinary depth-of-field blur, compression, artistic style, aesthetic preference, or instruction compliance.
+
+Both outcomes are equally valid. Do not assume an anomaly must exist. Set `no_error` from visible evidence in the image. If no well-supported anomaly is visible, return `no_error=true` and an empty `boxes` list. Otherwise return `no_error=false` and only tight, non-overlapping boxes for clearly supported anomalies.
+
+Allowed family values:
+- D1_Artifact/A1_RenderingArtifact
+- D1_Artifact/A2_StructuralArtifact
+- D1_Artifact/A3_TopologyArtifact
+- D1_Artifact/A4_RelationalAndPhysicalArtifact
+- D2_TextCorrectness/A1_TextVisualIntegrity
+
+Coordinates use `[x_min,y_min,x_max,y_max]` on a 0..1000 image coordinate system, with 0 <= x_min < x_max <= 1000 and 0 <= y_min < y_max <= 1000.
+
+Return exactly one JSON object with this schema:
+`no_error`: boolean; `boxes`: a list. Each box has `bbox_1000_xyxy`, `family`, and a brief visible-evidence `description`. Return no analysis or additional text.

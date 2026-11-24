@@ -1,0 +1,223 @@
+[
+  {
+    "label": "Qwen3.6-27b",
+    "name": "Qwen3.6-27B / Direct",
+    "file": "inputs/predictions/config_01.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 23.373291022653913
+      },
+      "detection": {
+        "recall_0_1": 0.3066061522945033
+      }
+    }
+  },
+  {
+    "label": "0722_ck145",
+    "name": "Workflow-SFT / Direct",
+    "file": "inputs/predictions/config_02.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 28.508175542276348
+      },
+      "detection": {
+        "recall_0_1": 0.24357034795763993
+      }
+    }
+  },
+  {
+    "label": "0722_ck145 + v4",
+    "name": "Workflow-SFT / Full-Seq",
+    "file": "inputs/predictions/config_03.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 31.54905300248278
+      },
+      "detection": {
+        "recall_0_1": 0.3378719112455875
+      }
+    }
+  },
+  {
+    "label": "0722_ck145 + v5",
+    "name": "Workflow-SFT / Conservative",
+    "file": "inputs/predictions/config_04.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 28.73827568726306
+      },
+      "detection": {
+        "recall_0_1": 0.22995461422087746
+      }
+    }
+  },
+  {
+    "label": "0722_ck145 + v6",
+    "name": "Workflow-SFT / Full-Sched",
+    "file": "inputs/predictions/config_05.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 31.894965213995974
+      },
+      "detection": {
+        "recall_0_1": 0.3338376197680282
+      }
+    }
+  },
+  {
+    "label": "0722_ck145 + v6.3",
+    "name": "Workflow-SFT / Selective",
+    "file": "inputs/predictions/config_06.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 29.40601684117255
+      },
+      "detection": {
+        "recall_0_1": 0.3101361573373676
+      }
+    }
+  },
+  {
+    "label": "0820_ck1001",
+    "name": "Trajectory-SFT-R2 / Direct",
+    "file": "inputs/predictions/config_07.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 25.405694969619823
+      },
+      "detection": {
+        "recall_0_1": 0.33182047402924864
+      }
+    }
+  },
+  {
+    "label": "0820_ck1001 + v6.3",
+    "name": "Trajectory-SFT-R2 / Selective",
+    "file": "inputs/predictions/config_08.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 29.058609593622702
+      },
+      "detection": {
+        "recall_0_1": 0.324256177508825
+      }
+    }
+  },
+  {
+    "label": "0820_ck740",
+    "name": "Trajectory-SFT-R1 / Direct",
+    "file": "inputs/predictions/config_09.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 24.53462867910811
+      },
+      "detection": {
+        "recall_0_1": 0.3333333333333333
+      }
+    }
+  },
+  {
+    "label": "0826_ck136",
+    "name": "Decision-SFT / Direct",
+    "file": "inputs/predictions/config_10.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 30.419005378058145
+      },
+      "detection": {
+        "recall_0_1": 0.232476046394352
+      }
+    }
+  },
+  {
+    "label": "0826_ck136 + v6.3",
+    "name": "Decision-SFT / Selective",
+    "file": "inputs/predictions/config_11.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 31.403088124148375
+      },
+      "detection": {
+        "recall_0_1": 0.29046898638426627
+      }
+    }
+  },
+  {
+    "label": "0828_ck444",
+    "name": "Decision-SFT-Balanced+ / Direct",
+    "file": "inputs/predictions/config_12.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 22.38680598832677
+      },
+      "detection": {
+        "recall_0_1": 0.08572869389813415
+      }
+    }
+  },
+  {
+    "label": "0828_ck688",
+    "name": "Decision-SFT-Pool+ / Direct",
+    "file": "inputs/predictions/config_13.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 19.17342473720359
+      },
+      "detection": {
+        "recall_0_1": 0.05143721633888049
+      }
+    }
+  },
+  {
+    "label": "Qwen3.8-27b",
+    "name": "Qwen3.8-27B / Direct",
+    "file": "inputs/predictions/config_14.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 23.920409164847758
+      },
+      "detection": {
+        "recall_0_1": 0.2400403429147756
+      }
+    }
+  },
+  {
+    "label": "qwen3.7-plus",
+    "name": "Qwen3.7-Plus / Direct",
+    "file": "inputs/predictions/config_15.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 19.66543674113039
+      },
+      "detection": {
+        "recall_0_1": 0.2652546646495209
+      }
+    }
+  },
+  {
+    "label": "gpt-5.6-sol",
+    "name": "GPT-5.6-sol / Direct",
+    "file": "inputs/predictions/config_16.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 20.239629928615706
+      },
+      "detection": {
+        "recall_0_1": 0.08018154311649017
+      }
+    }
+  },
+  {
+    "label": "gemini-3.5-flash",
+    "name": "Gemini-3.5-Flash / Direct",
+    "file": "inputs/predictions/config_17.jsonl",
+    "expected": {
+      "headline": {
+        "elastic_bbox_score": 16.268543250570502
+      },
+      "detection": {
+        "recall_0_1": 0.1129601613716591
+      }
+    }
+  }
+]

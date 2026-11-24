@@ -1,0 +1,276 @@
+{
+  "plan_version": "2026-07-25.v1",
+  "benchmark_total": 2500,
+  "counting_rule": "Only the accepted primary leaf increments quota; secondary labels are retained but never counted.",
+  "clean_quota": 750,
+  "leaf_quotas": {
+    "D1-A1": {
+      "boundary_blending": 55,
+      "local_smearing": 45,
+      "texture_discontinuity": 60,
+      "texture_repetition": 55,
+      "detail_loss": 70,
+      "color_corruption": 45
+    },
+    "D1-A2": {
+      "extra_part": 70,
+      "missing_part": 65,
+      "duplicated_part": 40,
+      "fused_parts": 60,
+      "split_part": 25,
+      "deformed_part": 80,
+      "misplaced_part": 35,
+      "misattached_part": 35,
+      "disconnected_part": 35,
+      "articulation_error": 45,
+      "proportion_error": 40
+    },
+    "D1-A3": {
+      "broken_path": 18,
+      "missing_connection": 15,
+      "wrong_connection": 12,
+      "unintended_connection": 12,
+      "branching_error": 10,
+      "unclosed_shape": 15,
+      "unintended_closure": 8,
+      "crossing_state_error": 10,
+      "arrow_error": 15,
+      "symbol_deformation": 15
+    },
+    "D1-A4": {
+      "interpenetration": 25,
+      "occlusion_error": 20,
+      "contact_error": 25,
+      "support_error": 25,
+      "scale_inconsistency": 20,
+      "occluded_structure_misalignment": 15,
+      "perspective_inconsistency": 20,
+      "illumination_inconsistency": 15,
+      "reflection_inconsistency": 15,
+      "pose_infeasibility": 20,
+      "material_behavior_inconsistency": 10
+    },
+    "D2-A": {
+      "glyph_unrecognizable": 90,
+      "glyph_malformed": 100,
+      "character_fusion": 65,
+      "character_overlap": 40,
+      "spacing_error": 55,
+      "alignment_error": 55,
+      "orientation_error": 40,
+      "text_blur": 50,
+      "text_occlusion": 25,
+      "text_clipping": 30
+    },
+    "D2-B": {
+      "text_absent": 0,
+      "text_incomplete": 0,
+      "extra_text": 0,
+      "text_identity_mismatch": 0,
+      "text_order_mismatch": 0,
+      "orthographic_mismatch": 0,
+      "text_region_mismatch": 0
+    }
+  },
+  "unfilled_expansion_target": {
+    "D2-B": {
+      "text_absent": 30,
+      "text_incomplete": 30,
+      "extra_text": 30,
+      "text_identity_mismatch": 30,
+      "text_order_mismatch": 30,
+      "orthographic_mismatch": 30,
+      "text_region_mismatch": 30
+    },
+    "reason": "None of the ten unpacked datasets contains an adequate combination of existing erroneous model output, known target text, and error annotation. These 210 items are a documented gap and are not part of the 2,500 committed total."
+  },
+  "group_totals": {
+    "clean": 750,
+    "D1-A1": 330,
+    "D1-A2": 530,
+    "D1-A3": 130,
+    "D1-A4": 210,
+    "D2-A": 550,
+    "D2-B": 0
+  },
+  "score_scale": {
+    "5": "Unmistakable, visually dominant, and supported by specific visible evidence.",
+    "4": "Clear and prominent, with little ambiguity.",
+    "3": "Plausible but secondary, mild, or boundary-ambiguous.",
+    "2": "Weak possibility; evidence is insufficient for benchmark truth.",
+    "1": "Unsupported or contradicted by the image."
+  },
+  "acceptance": {
+    "minimum_primary_score": 4,
+    "minimum_confidence": 0.72,
+    "require_visible_evidence": true,
+    "reject_if_artistic_style_only": true,
+    "reject_if_no_existing_error_annotation": true,
+    "manual_review_if_score_margin_below": 1,
+    "manual_review_if_confidence_below": 0.85
+  },
+  "runtime_budget": {
+    "workers": 20,
+    "requests_per_second": 1.5,
+    "timeout_seconds": 90,
+    "max_retries": 2,
+    "max_output_tokens": 4096,
+    "max_candidates": 12000,
+    "max_candidates_per_dataset": 3500,
+    "dataset_candidate_caps": {
+      "ArtiBench": 1000,
+      "SalArt-VQA": 950,
+      "X-AIGD": 3500,
+      "TextPecker-1.5M": 3000
+    },
+    "max_http_requests_including_retries": 15000,
+    "max_total_reported_tokens": 30000000,
+    "pilot_candidates_per_dataset_profile": 20,
+    "yield_switch_after_candidates": 200,
+    "minimum_pool_eligibility_rate": 0.08,
+    "estimated_image_input_tokens_each": 1100,
+    "estimated_total_tokens_upper_bound": 30000000
+  },
+  "datasets": {
+    "ArtiBench": {
+      "status": "include",
+      "committed_total": 500,
+      "roles": {
+        "artifact": 250,
+        "clean": 250
+      },
+      "allowed_profiles": [
+        "D1-A1",
+        "D1-A2",
+        "D1-A4"
+      ],
+      "routing_fields": [
+        "bbox",
+        "explanation",
+        "artifact label"
+      ],
+      "notes": "Existing paired artifact/clean images and localized explanations. A3 is allowed only after explicit diagram/connection routing, not from ordinary fused body parts."
+    },
+    "PICABench": {
+      "status": "exclude",
+      "committed_total": 0,
+      "allowed_profiles": [],
+      "notes": "Physical-concept source images are not annotated erroneous model outputs; useful as reference material only."
+    },
+    "autobench_2025": {
+      "status": "exclude_current",
+      "committed_total": 0,
+      "allowed_profiles": [],
+      "notes": "Generated scientific diagrams and Graphviz references exist, but there is no directly usable leaf-level error annotation. Graph diff would create new labels beyond the accepted mapping-only VLM scope."
+    },
+    "phyedit-bench": {
+      "status": "exclude",
+      "committed_total": 0,
+      "allowed_profiles": [],
+      "notes": "Primarily physics-aware image editing and instruction compliance. Outputs are not a pre-annotated artifact-error set for the current taxonomy."
+    },
+    "ImagenWorld": {
+      "status": "exclude",
+      "committed_total": 0,
+      "allowed_profiles": [],
+      "notes": "World-guided editing data lacks pre-existing artifact error truth matching D1 leaves."
+    },
+    "OCRGenBench": {
+      "status": "exclude_current",
+      "committed_total": 0,
+      "allowed_profiles": [],
+      "notes": "Known target strings and GT images fit D2-B semantically, but the unpacked data does not provide annotated erroneous model outputs. Never treat the editing input as an error output."
+    },
+    "SalArt-VQA": {
+      "status": "include",
+      "committed_total": 800,
+      "roles": {
+        "artifact": 400,
+        "clean_reference": 400
+      },
+      "allowed_profiles": [
+        "D1-A1",
+        "D1-A2",
+        "D1-A4"
+      ],
+      "routing_fields": [
+        "Q2",
+        "Q3",
+        "Q4",
+        "salient artifact type",
+        "reference pair"
+      ],
+      "notes": "Strong source for salient, localized artifacts. Original topology anomaly on ordinary entities routes to A2 fused_parts, not A3."
+    },
+    "TextAtlasEval": {
+      "status": "exclude_current",
+      "committed_total": 0,
+      "allowed_profiles": [],
+      "notes": "Text images and target strings are evaluation inputs/references rather than labeled erroneous outputs, so they cannot fill D2-B under the no-regeneration rule."
+    },
+    "X-AIGD": {
+      "status": "include",
+      "committed_total": 700,
+      "roles": {
+        "artifact": 600,
+        "clean_candidate": 100
+      },
+      "allowed_profiles": [
+        "D1-A1",
+        "D1-A2",
+        "D1-A3",
+        "D1-A4",
+        "D2-A"
+      ],
+      "routing_fields": [
+        "coarse level",
+        "polygon",
+        "prompt",
+        "explanation"
+      ],
+      "coarse_routes": {
+        "low-level-edge_shape": [
+          "D1-A1",
+          "D1-A2"
+        ],
+        "low-level-texture": [
+          "D1-A1"
+        ],
+        "low-level-color": [
+          "D1-A1",
+          "D1-A4"
+        ],
+        "low-level-symbol": [
+          "D1-A3",
+          "D2-A"
+        ],
+        "high-level-semantics": [
+          "D1-A2",
+          "D1-A4"
+        ],
+        "cognitive-level-commonsense": [
+          "D1-A4"
+        ],
+        "cognitive-level-physics": [
+          "D1-A4"
+        ]
+      },
+      "notes": "Use only labeled splits. Empty-label images are clean candidates and still require review. Symbol samples must be routed as text, explicit graphic symbol, or reject."
+    },
+    "TextPecker-1.5M": {
+      "status": "include",
+      "committed_total": 500,
+      "roles": {
+        "text_visual_artifact": 500
+      },
+      "allowed_profiles": [
+        "D2-A"
+      ],
+      "routing_fields": [
+        "decoded_test directory family",
+        "image"
+      ],
+      "notes": "Use decoded_test only, deduplicate by SHA-256, and never infer D2-B because target strings are not materialized in the decoded sidecars."
+    }
+  }
+}

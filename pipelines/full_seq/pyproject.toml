@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "u1-critic-v41"
+version = "4.1.0"
+description = "Edit-grounded image Critic V4.1 with semantic coverage harness and online consolidation"
+readme = "README_CN.md"
+requires-python = ">=3.10"
+dependencies = ["Pillow>=10.0"]
+
+[project.scripts]
+u1-critic-v41-run = "u1_critic_v41.run:main"
+u1-critic-v41-report = "u1_critic_v41.report:main"
+u1-critic-v41-serve = "u1_critic_v41.serve:main"
+u1-critic-v41-compare = "u1_critic_v41.model_comparison_report:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

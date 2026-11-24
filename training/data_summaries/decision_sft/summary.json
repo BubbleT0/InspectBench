@@ -1,0 +1,48 @@
+{
+  "seed": 20260824,
+  "model_visible_columns": [
+    "messages",
+    "images"
+  ],
+  "forbidden_input_markers_checked": [
+    "reference generation instruction",
+    "generation_prompt",
+    "source_name",
+    "source_model",
+    "base_prediction",
+    "no target text or generation instruction"
+  ],
+  "text_content_fidelity_enabled": false,
+  "reasoning_content_enabled": false,
+  "train": {
+    "rows": 4000,
+    "sources": {
+      "clean_pinterest": 1000,
+      "error_v41_flash": 1900,
+      "clean_wikimedia": 1000,
+      "error_v41_hp": 100
+    }
+  },
+  "validation": {
+    "rows": 800,
+    "sources": {
+      "clean_wikimedia": 200,
+      "error_v41_hp": 17,
+      "clean_pinterest": 200,
+      "error_v41_flash": 383
+    }
+  },
+  "eligible_pool_sizes": {
+    "clean_wikimedia": 7077,
+    "clean_pinterest": 7311,
+    "error_v41_hp": 117,
+    "error_v41_flash": 6796
+  },
+  "train_validation_image_overlap": 0,
+  "source_files": {
+    "clean_wikimedia": "/path/to/storage/multimodal_data/research/images/image-noerror2/prefilter_candidates_vlm_judge_errors.jsonl",
+    "clean_pinterest": "/path/to/storage/multimodal_data/research/images/pinterest_tianbo/raw-27b/raw_pinterest_vlm_judge_errors.jsonl",
+    "error_v41_hp": "/path/to/storage/multimodal_data/research/images/image-error/output/v4.1/filtered_nontext_high_precision/images_with_errors_v4.1_high_precision_nontext.jsonl",
+    "error_v41_flash": "/path/to/storage/multimodal_data/research/images/image-error/output/v4.1_flash_50000/images_with_errors_v4.1_flash_50000.jsonl"
+  }
+}

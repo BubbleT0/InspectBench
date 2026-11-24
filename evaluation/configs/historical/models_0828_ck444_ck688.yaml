@@ -1,0 +1,22 @@
+models:
+  0828_ck444:
+    adapter: openai_chat
+    endpoint: https://api.example.invalid
+    api_key_env: CRITIC_API_KEY
+    model: Qwen3.6-27B-agen-0722-agentv4
+    timeout_seconds: 900
+    max_retries: 3
+    max_tokens: 32768
+    temperature: 0
+    rps: 0
+
+  0828_ck688:
+    adapter: openai_chat
+    endpoint: https://api.example.invalid
+    api_key_env: CRITIC_API_KEY
+    model: Qwen3.6-27B-agen-0722-agentv4
+    timeout_seconds: 900
+    max_retries: 3
+    max_tokens: 32768
+    temperature: 0
+    rps: 0

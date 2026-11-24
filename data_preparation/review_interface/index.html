@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Critic Benchmark 离线人工复核</title><link rel="stylesheet" href="style.css"></head>
+<body><header><div><div class="eyebrow">Offline Review Workspace</div><h1>Critic Benchmark 离线人工复核</h1><p>原图、来源、Prompt、VLM 决策与人工标注均保存在本文件夹</p></div><div class="stamp" id="stamp"></div></header>
+<main><section class="metrics"><div><b id="accepted">0</b><span>VLM 已纳入</span></div><div><b id="records">0</b><span>全部去重决策</span></div><div><b id="reviewed">0</b><span>人工已处理</span></div><div><b id="approved">0</b><span>人工通过</span></div><div><b id="corrected">0</b><span>人工修正</span></div><div><b id="rejected">0</b><span>人工拒绝</span></div></section>
+<section class="panel"><div class="toolbar"><label>复核人<input id="reviewer" placeholder="姓名或工号"></label><button id="export_reviews">导出人工标注 JSON</button><label class="file">导入人工标注 JSON<input id="import_reviews" type="file" accept="application/json"></label><a href="summary.md" target="_blank">查看交接文档</a><a href="export_manifest.jsonl" target="_blank">来源 manifest</a></div><div class="notice">人工标注自动保存在当前浏览器 localStorage。为了防止清理浏览器数据后丢失，请定期点击“导出人工标注 JSON”。</div></section>
+<section class="panel"><h2>Taxonomy 总览</h2><div class="overview" id="overview"></div></section>
+<section class="panel"><div class="title-row"><h2>子分类数据</h2><span id="result_count"></span></div><div class="filters"><select id="group"></select><select id="leaf"></select><select id="dataset"></select><select id="vlm_status"><option value="accepted">仅 VLM 已纳入</option><option value="quota_full">主类配额已满</option><option value="model_rejected">VLM 拒绝</option><option value="request_failed">请求失败</option><option value="all">全部 VLM 状态</option></select><select id="review_status"><option value="all">全部人工状态</option><option value="unreviewed">未复核</option><option value="approved">人工通过</option><option value="corrected">人工修正</option><option value="rejected">人工拒绝</option><option value="followup">需进一步复核</option></select><input id="search" placeholder="搜索 ID / prompt / 证据"><button id="apply">筛选</button></div><div class="subfilters"><label>每页<select id="page_size"><option>12</option><option selected>24</option><option>48</option></select></label><span id="active_filter"></span></div><div class="cards" id="cards"></div><div class="pager"><button id="prev">上一页</button><span id="page_info">1 / 1</span><button id="next">下一页</button></div></section></main>
+<script src="data/bootstrap.js"></script>
+<script src="data/records_000.js"></script>
+<script src="data/records_001.js"></script>
+<script src="data/records_002.js"></script>
+<script src="data/records_003.js"></script>
+<script src="data/records_004.js"></script>
+<script src="data/records_005.js"></script>
+<script src="data/records_006.js"></script>
+<script src="data/records_007.js"></script>
+<script src="data/records_008.js"></script>
+<script src="data/records_009.js"></script>
+<script src="data/records_010.js"></script>
+<script src="data/records_011.js"></script>
+<script src="data/records_012.js"></script>
+<script src="data/records_013.js"></script>
+<script src="data/records_014.js"></script>
+<script src="data/records_015.js"></script>
+<script src="data/records_016.js"></script>
+<script src="data/records_017.js"></script>
+<script src="data/records_018.js"></script>
+<script src="data/records_019.js"></script>
+<script src="data/records_020.js"></script>
+<script src="app.js"></script></body></html>

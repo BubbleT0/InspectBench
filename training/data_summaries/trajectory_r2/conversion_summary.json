@@ -1,0 +1,111 @@
+{
+  "target": "swift_messages",
+  "input_meta": "/path/to/experiments/trajectory_r2/data/stage4_rp/meta_middle_format.json",
+  "meta_output": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/meta.json",
+  "summary_output": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/conversion_summary.json",
+  "total_datasets": 12,
+  "processed_datasets": 12,
+  "total_records": 21307,
+  "written_records": 21307,
+  "skipped_records": 0,
+  "error_count": 0,
+  "elapsed_seconds": 2.985,
+  "datasets": {
+    "negative_old_v41_high_precision_test": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/negative_old_v41_high_precision_test.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/negative_old_v41_high_precision_test.jsonl",
+      "total_records": 6,
+      "written_records": 6,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "negative_old_v41_high_precision_train": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/negative_old_v41_high_precision_train.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/negative_old_v41_high_precision_train.jsonl",
+      "total_records": 105,
+      "written_records": 105,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "negative_old_v41_high_precision_validation": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/negative_old_v41_high_precision_validation.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/negative_old_v41_high_precision_validation.jsonl",
+      "total_records": 6,
+      "written_records": 6,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "negative_v41_flash_50000_test": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/negative_v41_flash_50000_test.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/negative_v41_flash_50000_test.jsonl",
+      "total_records": 340,
+      "written_records": 340,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "negative_v41_flash_50000_train": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/negative_v41_flash_50000_train.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/negative_v41_flash_50000_train.jsonl",
+      "total_records": 6122,
+      "written_records": 6122,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "negative_v41_flash_50000_validation": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/negative_v41_flash_50000_validation.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/negative_v41_flash_50000_validation.jsonl",
+      "total_records": 340,
+      "written_records": 340,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "positive_pinterest_test": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/positive_pinterest_test.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/positive_pinterest_test.jsonl",
+      "total_records": 366,
+      "written_records": 366,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "positive_pinterest_train": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/positive_pinterest_train.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/positive_pinterest_train.jsonl",
+      "total_records": 6579,
+      "written_records": 6579,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "positive_pinterest_validation": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/positive_pinterest_validation.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/positive_pinterest_validation.jsonl",
+      "total_records": 366,
+      "written_records": 366,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "positive_wikimedia_test": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/positive_wikimedia_test.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/positive_wikimedia_test.jsonl",
+      "total_records": 354,
+      "written_records": 354,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "positive_wikimedia_train": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/positive_wikimedia_train.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/positive_wikimedia_train.jsonl",
+      "total_records": 6369,
+      "written_records": 6369,
+      "skipped_records": 0,
+      "error_count": 0
+    },
+    "positive_wikimedia_validation": {
+      "input_path": "/path/to/experiments/trajectory_r2/data/stage2_input_v3/critic/positive_wikimedia_validation.jsonl",
+      "output_path": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/positive_wikimedia_validation.jsonl",
+      "total_records": 354,
+      "written_records": 354,
+      "skipped_records": 0,
+      "error_count": 0
+    }
+  }
+}

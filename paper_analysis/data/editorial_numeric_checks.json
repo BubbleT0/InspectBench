@@ -1,0 +1,95 @@
+{
+  "rank_reversal": {
+    "Trajectory-SFT-R1": {
+      "recall_rank": 3,
+      "score_rank": 10,
+      "sensitivity_pct": 97.21,
+      "clean_fpr_pct": 81.93
+    },
+    "Decision-SFT": {
+      "recall_rank": 12,
+      "score_rank": 4,
+      "sensitivity_pct": 61.0,
+      "clean_fpr_pct": 10.9
+    }
+  },
+  "direct_selective_changes": [
+    {
+      "checkpoint": "Trajectory-SFT-R2",
+      "clean_fpr_direct_pct": 81.62,
+      "clean_fpr_selective_pct": 48.29,
+      "delta_clean_fpr_pp": -33.33,
+      "delta_score": 3.653,
+      "delta_recall_pp": -0.75
+    },
+    {
+      "checkpoint": "Workflow-SFT",
+      "clean_fpr_direct_pct": 35.510000000000005,
+      "clean_fpr_selective_pct": 46.73,
+      "delta_clean_fpr_pp": 11.22,
+      "delta_score": 0.898,
+      "delta_recall_pp": 6.65
+    },
+    {
+      "checkpoint": "Decision-SFT",
+      "clean_fpr_direct_pct": 10.9,
+      "clean_fpr_selective_pct": 26.169999999999998,
+      "delta_clean_fpr_pp": 15.27,
+      "delta_score": 0.984,
+      "delta_recall_pp": 5.8
+    }
+  ],
+  "full_seq_failed_output_count": 22,
+  "full_seq_clean_component_upper_bound_pp": 6.853582554517133,
+  "training_negative_domain_alignment": {
+    "benchmark_natural_clean": 110,
+    "benchmark_clean": 321,
+    "natural_share_pct": 34.26791277258567,
+    "inference": "possible broad-domain alignment, not measured causation"
+  },
+  "score_calibration": {
+    "closed_bounds": [
+      0,
+      100
+    ],
+    "always_empty": 9,
+    "perfect": 100,
+    "counterexample_below_9": 3.310914970542981
+  },
+  "top3_score_intervals_overlap": true,
+  "decision_direct_full_sched_intervals_overlap": true,
+  "top3_no_overlap_pct": {
+    "Workflow-SFT / Full-Sched": 46.75,
+    "Workflow-SFT / Full-Seq": 45.440000000000005,
+    "Decision-SFT / Selective": 50.38
+  },
+  "lineage_components": [
+    {
+      "model": "Qwen3.6-27B",
+      "score": 23.373,
+      "recall_01": 0.3066,
+      "positive_soft": 0.2115,
+      "clean_soft": 0.2899
+    },
+    {
+      "model": "Workflow-SFT",
+      "score": 28.508,
+      "recall_01": 0.2436,
+      "positive_soft": 0.1616,
+      "clean_soft": 0.7087
+    },
+    {
+      "model": "Decision-SFT",
+      "score": 30.419,
+      "recall_01": 0.2325,
+      "positive_soft": 0.1421,
+      "clean_soft": 0.9192
+    }
+  ],
+  "source_files": [
+    "data/summary_0917.csv",
+    "data/annotation_0917_analysis.json"
+  ],
+  "raw_prediction_rescoring": false,
+  "paired_significance_test": false
+}

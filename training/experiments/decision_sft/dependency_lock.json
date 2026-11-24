@@ -1,0 +1,24 @@
+{
+  "created_at": "2026-08-24T18:00:00+08:00",
+  "policy": "Use only experiment-private source snapshots; never import shared dependency symlinks.",
+  "python_environment": "/path/to/storage/research/miniconda3/envs/swift",
+  "repositories": {
+    "ms-swift": {
+      "commit": "b8241e85781b8f8c8f3f4b1019082657aef14603",
+      "path": "/path/to/experiments/decision_sft/deps/frozen_b8241e8_mg31e327_mb_c527134/ms-swift"
+    },
+    "Megatron-LM": {
+      "commit": "31e3277683dbf06cff4732cbc0033573437d1097",
+      "path": "/path/to/experiments/decision_sft/deps/frozen_b8241e8_mg31e327_mb_c527134/Megatron-LM"
+    },
+    "mcore-bridge": {
+      "commit": "c527134caa372e85e8dbf75127d4df02b088bd44",
+      "path": "/path/to/experiments/decision_sft/deps/frozen_b8241e8_mg31e327_mb_c527134/mcore-bridge"
+    }
+  },
+  "validation": {
+    "static_symbol_check": "passed",
+    "import_smoke": "passed_on_both_compute_nodes_pt-nf3hftlb",
+    "optimizer_2step_smoke": "passed_packed_default_loss_pt-7moxotbf"
+  }
+}

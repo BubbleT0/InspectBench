@@ -1,0 +1,153 @@
+{
+  "exp": "critic_rp1_stratval_4src_16gpu_neo1_trajectory_20260820",
+  "date": "2026-08-20",
+  "status": "TRAINING_COMPLETE_EVAL_QUEUED",
+  "job": {
+    "id": "pt-4ptnj7rl",
+    "display_name": "critic-rp1-stratval-16g-e1-0820",
+    "submitted_at": "2026-08-20T09:14:05Z",
+    "initial_state": "STARTING",
+    "final_state": "SUCCEEDED",
+    "completed_at": "2026-08-20T11:09:00Z"
+  },
+  "model": "/path/to/checkpoints/workflow_sft",
+  "data": {
+    "sources": {
+      "positive_noerror": [
+        "/path/to/storage/multimodal_data/research/images/image-noerror2/prefilter_candidates_vlm_judge_errors.jsonl",
+        "/path/to/storage/multimodal_data/research/images/pinterest_tianbo/raw-27b/raw_pinterest_vlm_judge_errors.jsonl"
+      ],
+      "negative_error": [
+        "/path/to/storage/multimodal_data/research/images/image-error/output/v4.1/images_with_errors_v4.1.jsonl",
+        "/path/to/storage/multimodal_data/research/images/image-error/output/v4.1_flash_50000/images_with_errors_v4.1_flash_50000.jsonl"
+      ]
+    }
+  },
+  "env": {
+    "workspace_type": "multimodal",
+    "partition": "neo1-trajectory",
+    "framework": "pytorch",
+    "worker_spec": "N6lS.Iu.I80.8.64c1024g",
+    "worker_nodes": 2,
+    "total_gpus": 16
+  },
+  "hparams": {
+    "training": "full_parameter_sft",
+    "num_train_epochs": 1,
+    "max_length": 8192,
+    "lr": 1e-06,
+    "min_lr": 1e-07,
+    "warmup_fraction": 0.2,
+    "micro_batch_size": 1,
+    "global_batch_size": 8,
+    "TP": 2,
+    "PP": 4,
+    "CP": 1,
+    "VPP": 2,
+    "DP": 2,
+    "repeat_time_all_sources": 1.0,
+    "save_steps": 250,
+    "eval_steps": 250,
+    "selection_metrics": [
+      "balanced_accuracy",
+      "clean_specificity",
+      "bbox_f1"
+    ]
+  },
+  "stages": {
+    "semantic_qc": {
+      "status": "waived",
+      "reason": "continued prior explicit user decision not to run QC"
+    },
+    "stage0_audit": {
+      "status": "complete",
+      "all_source_rows": 21552,
+      "selected_by_structural_gate": 21552,
+      "positive_no_error": 14388,
+      "negative_error": 7164,
+      "images_checked": 21552,
+      "invalid_images": 0,
+      "duplicate_identity_groups": 0,
+      "summary": "/path/to/experiments/trajectory_r1/data/stage0_audit/audit_summary.json"
+    },
+    "stage1_openai": {
+      "status": "complete",
+      "split": "stratified_by_source_and_label",
+      "ratios": {
+        "train": 0.9,
+        "validation": 0.05,
+        "test": 0.05
+      },
+      "seed": 20260820,
+      "rows": 21552,
+      "train": 19396,
+      "validation": 1078,
+      "test": 1078,
+      "train_positive_noerror": 12948,
+      "train_negative_error": 6448,
+      "validation_positive_noerror": 720,
+      "validation_negative_error": 358,
+      "output": "/path/to/experiments/trajectory_r1/data/stage1_openai"
+    },
+    "stage1_5_structured_qc": {
+      "status": "complete",
+      "input_records": 21552,
+      "output_records": 21552,
+      "dropped_records": 0,
+      "normalized_records": 0
+    },
+    "stage2_validation": {
+      "status": "complete",
+      "datasets": 12,
+      "rows": 21552,
+      "existing_media": 21552,
+      "validation_exit_code": 0,
+      "format_errors": 0
+    },
+    "stage4_repeat_policy": {
+      "status": "approved_by_user",
+      "repeat_time": 1.0,
+      "effective_train_records": 19396
+    },
+    "stage5_swift": {
+      "status": "complete",
+      "input_records": 21552,
+      "written_records": 21552,
+      "skipped_records": 0,
+      "errors": 0
+    },
+    "preflight": {
+      "status": "complete",
+      "train_records": 19396,
+      "validation_records": 1078,
+      "train_validation_image_overlap": 0,
+      "train_cached_shards_planned": 4,
+      "validation_cached_shards_planned": 4,
+      "cached_val_dataset_enabled": true
+    },
+    "training": {
+      "status": "complete",
+      "iterations": 740,
+      "final_train_loss": 0.22241004,
+      "checkpoints": [
+        250,
+        500,
+        740
+      ],
+      "validation_loss": {
+        "checkpoint-250": 0.25962669,
+        "checkpoint-500": 0.23878899,
+        "checkpoint-740": 0.23103425
+      }
+    },
+    "generative_validation": {
+      "status": "queued",
+      "split": "validation",
+      "samples": 1078,
+      "base_eval_status": "running",
+      "checkpoint_eval_mode": "one_8gpu_node_three_parallel_tp2_vllm_servers",
+      "selection_rule": "balanced_accuracy_primary; within_0.01_prefer_clean_specificity; bbox_f1_tertiary",
+      "output": "/path/to/experiments/trajectory_r1/eval/stratified_validation_20260821"
+    }
+  }
+}

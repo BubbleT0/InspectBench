@@ -1,0 +1,28 @@
+{
+  "release_validation": {
+    "source": "README_SCORER.md, Section 15",
+    "status": "source-reported; not rerun in this package",
+    "images": 1039,
+    "maximum_absolute_point_estimate_difference": 0,
+    "zero_derived_from": "exact agreement of the checked outputs stated by the source",
+    "metrics": [
+      "headline",
+      "detection",
+      "counts",
+      "false positives"
+    ],
+    "configuration_ids_enumerated": false,
+    "configuration_count": null,
+    "covers_all_17_configurations_established": false,
+    "bootstrap_equality_claimed": false
+  },
+  "aggregate_validation": {
+    "status": "computed from rounded CSV values",
+    "configurations": 17,
+    "maximum_absolute_residual": 0.0065139960327336155,
+    "maximum_residual_configuration": "Decision-SFT-Pool+",
+    "all_rounding_intervals_overlap": true,
+    "raw_prediction_equivalence_test": false
+  },
+  "input_csv_sha256": "2213861e081d5f86cefe548f1da3bdf756d1a11df3669c78b2e977947b01232a"
+}

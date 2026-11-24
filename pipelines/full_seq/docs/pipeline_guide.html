@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Critic Pipeline · V4.1 Harness</title>
+  <style>
+    :root{
+      --bg:#f4f1ea;--paper:#fffdf8;--ink:#17201d;--muted:#64706b;
+      --line:#d9ddd5;--green:#17715b;--green2:#d8eee6;--blue:#205e82;
+      --blue2:#dcebf4;--orange:#bd5c2b;--orange2:#f8e3d6;--red:#a33b35;
+      --red2:#f7dfdc;--gold:#9c741e;--gold2:#f3e9c9;--shadow:0 18px 48px rgba(26,45,37,.08)
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.65}
+    a{color:inherit}.shell{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+    aside{position:sticky;top:0;height:100vh;padding:28px 22px;background:#14231f;color:#eaf2ed;overflow:auto}
+    .brand{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#96afa5}.brand strong{display:block;margin-top:8px;font-size:24px;letter-spacing:-.03em;color:white}
+    nav{margin-top:30px;display:grid;gap:5px}nav a{padding:9px 11px;border-radius:8px;text-decoration:none;font-size:13px;color:#b9cbc4}nav a:hover,nav a.active{background:#244039;color:white}
+    .side-note{margin-top:28px;padding:14px;border:1px solid #36564d;border-radius:12px;font-size:12px;color:#aec2ba}.side-note b{color:white}
+    main{min-width:0}.wrap{max-width:1240px;margin:auto;padding:46px 54px 90px}
+    .hero{padding:44px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#fffdf8 35%,#e2f1ea);box-shadow:var(--shadow)}
+    .eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;color:var(--green);text-transform:uppercase}.hero h1{margin:12px 0 18px;font-size:clamp(38px,5vw,68px);line-height:1.02;letter-spacing:-.055em}.hero p{max-width:860px;margin:0;color:#41514b;font-size:18px}
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}.badge{padding:7px 11px;border-radius:999px;background:white;border:1px solid #cddad4;font-size:12px;font-weight:700}
+    section{scroll-margin-top:24px;margin-top:64px}h2{margin:0 0 10px;font-size:30px;letter-spacing:-.035em}h3{margin:0 0 7px;font-size:17px}.lead{margin:0 0 24px;color:var(--muted);max-width:860px}
+    .principle{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:center;padding:25px;background:#18332b;color:white;border-radius:18px}.principle .num{font-size:74px;font-weight:900;line-height:1;color:#79cbae}.principle strong{font-size:23px}.principle p{margin:5px 0 0;color:#bdd1ca}
+    .flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:stretch}.step{position:relative;padding:18px 15px;background:var(--paper);border:1px solid var(--line);border-radius:14px;min-height:154px}.step:not(:last-child):after{content:"→";position:absolute;right:-13px;top:50%;z-index:2;width:16px;height:22px;color:var(--green);font-weight:900;background:var(--bg);text-align:center}.step .k{display:inline-grid;place-items:center;width:29px;height:29px;border-radius:9px;background:var(--green2);color:var(--green);font-size:12px;font-weight:900}.step h3{margin-top:12px}.step p{margin:0;color:var(--muted);font-size:13px}.stage{margin-top:10px;color:var(--blue);font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-word}
+    .grid2,.grid3,.grid4{display:grid;gap:16px}.grid2{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(4,1fr)}
+    .card{padding:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px}.card p{margin:6px 0 0;color:var(--muted);font-size:14px}.icon{font-size:24px}.tone-text{border-top:4px solid var(--blue)}.tone-art{border-top:4px solid var(--orange)}
+    .split{display:grid;grid-template-columns:1fr 82px 1fr;align-items:stretch}.channel{padding:25px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}.channel h3{font-size:22px}.channel ul{padding-left:18px;margin:13px 0 0;color:var(--muted);font-size:14px}.bridge{display:grid;place-items:center;color:var(--green);font-size:27px;font-weight:800}
+    .ledger{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:var(--paper)}table{width:100%;border-collapse:collapse}th,td{padding:13px 15px;text-align:left;border-bottom:1px solid #e8eae5;font-size:13px}th{background:#ecefe9;color:#50605a;font-size:11px;letter-spacing:.08em;text-transform:uppercase}.state{display:inline-flex;align-items:center;gap:6px;font-weight:800}.dot{width:8px;height:8px;border-radius:50%;background:var(--green)}.pending .dot{background:var(--gold)}.failed .dot{background:var(--red)}
+    .views{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:14px}.view{min-height:220px;padding:18px;border-radius:16px;border:1px solid var(--line);background:var(--paper)}.mock-image{height:128px;border-radius:11px;background:linear-gradient(135deg,#ccd7cd,#769487);position:relative;overflow:hidden}.mock-image:before{content:"";position:absolute;inset:16% 21%;border:3px solid #fff;border-radius:8px}.mock-image:after{content:"目标区域";position:absolute;left:22%;top:17%;padding:2px 7px;background:#fff;color:#17372f;font-size:11px;font-weight:800}.context .mock-image{background:linear-gradient(135deg,#d8c5a6,#8b6748)}.detail .mock-image{background:repeating-linear-gradient(45deg,#294e45 0 12px,#3d6d60 12px 24px)}.view p{margin:10px 0 0;color:var(--muted);font-size:13px}
+    .gate{display:grid;grid-template-columns:200px 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}.gate div{padding:15px 18px;border-bottom:1px solid var(--line)}.gate div:nth-child(odd){font-weight:800;background:#edf2ee}.gate div:nth-child(even){background:var(--paper);color:var(--muted)}
+    .boxes{display:grid;grid-template-columns:1fr 1fr;gap:18px}.box-demo{padding:20px;border-radius:16px;background:var(--paper);border:1px solid var(--line)}.canvas{height:230px;border-radius:12px;background:linear-gradient(135deg,#dad6cc,#b5c1b7);position:relative}.rect{position:absolute;border:3px solid var(--red);border-radius:5px}.rect.green{border-color:var(--green)}.rect span{position:absolute;top:-26px;left:-3px;padding:2px 7px;border-radius:5px;background:currentColor;color:white;font-size:11px}.box-demo h3{margin-top:14px}.bad{color:var(--red)}.good{color:var(--green)}
+    .taxonomy{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.tax-group{padding:24px;border-radius:17px;background:var(--paper);border:1px solid var(--line)}.tax-group h3{font-size:21px}.tax-list{display:grid;gap:8px;margin-top:15px}.tax-item{padding:11px 13px;border-radius:10px;background:#f0f2ed}.tax-item b{display:block;font-size:13px}.tax-item span{font-size:12px;color:var(--muted)}
+    .retry{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{padding:11px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font-size:13px}.arrow{color:var(--green);font-weight:900}.failure{margin-top:17px;padding:18px;border-left:4px solid var(--red);background:var(--red2);border-radius:0 13px 13px 0}.failure p{margin:5px 0 0;color:#71403c;font-size:14px}
+    pre{margin:0;padding:22px;border-radius:15px;background:#12231e;color:#d7ece3;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;overflow:auto}.key{color:#73d2b1}.str{color:#f4d58a}.numc{color:#9ecbf0}
+    .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.metric{padding:20px;background:var(--paper);border:1px solid var(--line);border-radius:15px}.metric strong{display:block;font-size:30px;letter-spacing:-.04em}.metric span{font-size:12px;color:var(--muted)}
+    details{border:1px solid var(--line);border-radius:14px;background:var(--paper);margin-bottom:10px}summary{cursor:pointer;padding:16px 18px;font-weight:800}details>div{padding:0 18px 18px;color:var(--muted);font-size:14px}.stage-list{margin:0;padding-left:20px}.stage-list code{color:var(--blue)}
+    .non-goal{padding:20px;background:var(--orange2);border-radius:15px;border:1px solid #efc7ae}.non-goal ul{margin:8px 0 0;padding-left:19px;color:#70452f}
+    .foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+    @media(max-width:1000px){.shell{display:block}aside{position:relative;height:auto}nav{grid-template-columns:repeat(3,1fr)}.flow{grid-template-columns:repeat(3,1fr)}.step:nth-child(3):after{display:none}.metrics{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:700px){.wrap{padding:24px 16px 60px}.hero{padding:28px 23px}.principle{grid-template-columns:1fr}.flow,.grid2,.grid3,.grid4,.views,.taxonomy,.boxes,.metrics{grid-template-columns:1fr}.step:after{display:none}.split{grid-template-columns:1fr}.bridge{height:55px}.gate{grid-template-columns:1fr}.gate div:nth-child(odd){border-bottom:0}nav{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <div class="brand">Image Quality Critic<strong>V4.1 Harness</strong></div>
+    <nav id="nav">
+      <a href="#overview">总览</a><a href="#principle">第一性原理</a><a href="#coverage">双通道覆盖</a>
+      <a href="#multiscale">多尺度取证</a><a href="#consensus">对抗共识</a><a href="#consolidation">在线整编</a>
+      <a href="#taxonomy">问题分类</a><a href="#protocol">坐标与输出</a><a href="#reliability">重试与失败</a>
+      <a href="#stages">模型调用轨迹</a><a href="#status">当前验证状态</a>
+    </nav>
+    <div class="side-note"><b>当前正式基线</b><br>adversarial_consensus<br>coverage_mode = harness_v41<br><br>页面依据当前代码实现整理，不包含已淘汰管线。</div>
+  </aside>
+  <main><div class="wrap">
+    <header class="hero" id="overview">
+      <div class="eyebrow">Current production logic · 2026-08-04</div>
+      <h1>从整图理解，到可执行的局部重绘区域</h1>
+      <p>V4.1 不是一次问答式的“看图找错”。它先建立内容覆盖账本，再让文字与非文字 Artifact 独立审查，使用原图、上下文与无损放大细节交叉确认，最后只把证据充分、肉眼明显、可局部重绘的问题整编为最终区域。</p>
+      <div class="badges"><span class="badge">中文推理与描述</span><span class="badge">BBox 整数 [0,1000]</span><span class="badge">文字 / Artifact 独立核销</span><span class="badge">只接受明显核心错误</span><span class="badge">正式结果禁止离线补救</span></div>
+    </header>
+
+    <section id="principle">
+      <h2>第一性原理</h2><p class="lead">所有环节都服务于同一个交付目标，而不是追求“问题越多越好”。</p>
+      <div class="principle"><div class="num">01</div><div><strong>找出明显的 Artifact 与明显的文字错误，并框出适合 edit 模型一次局部重绘的区域。</strong><p>框可以保留少量上下文冗余；实体或语义区块的独立性比绝对面积更重要。一个区域有多种问题时只保留一个框，在描述中完整列出所有问题。</p></div></div>
+      <div class="flow" style="margin-top:22px">
+        <div class="step"><span class="k">01</span><h3>纯像素输入</h3><p>读取图片，不把目录名、类别标签等答案线索发给模型。</p></div>
+        <div class="step"><span class="k">02</span><h3>覆盖建模</h3><p>双路语义分区，列出文字与实体，建立可核销账本。</p></div>
+        <div class="step"><span class="k">03</span><h3>多尺度检查</h3><p>原图、上下文、无损放大细节共同确认问题。</p></div>
+        <div class="step"><span class="k">04</span><h3>对抗复核</h3><p>Proposer → Skeptic → Judge，过滤误报与弱证据。</p></div>
+        <div class="step"><span class="k">05</span><h3>在线整编</h3><p>合并同一重绘目标，拆开空间独立目标，消除嵌套重复。</p></div>
+        <div class="step"><span class="k">06</span><h3>结构化输出</h3><p>正式结果、覆盖状态、编辑区域、来源闭环与完整 trace。</p></div>
+      </div>
+    </section>
+
+    <section id="coverage">
+      <h2>先保证“看全”，再讨论“判对”</h2><p class="lead">V4.1 用代码维护覆盖状态，不允许模型一句“检查完了”代替可审计的覆盖证明。</p>
+      <div class="grid2">
+        <div class="card"><h3>① 双路语义分区</h3><p><code>content.zones.primary</code> 给出主布局；<code>content.coverage.blind_inventory</code> 独立盲查。两者取并集，任何一路的“未发现”都不能抵消另一路发现的内容。</p></div>
+        <div class="card"><h3>② 内容清单与漏项审计</h3><p>分别盘点文字单元与独立实体/版面区块，再由独立 coverage audit 查漏；失效的 zone/channel 会触发定向 recovery。</p></div>
+      </div>
+      <div class="split" style="margin-top:18px">
+        <div class="channel tone-text"><div class="icon">文</div><h3>Text channel</h3><ul><li>覆盖所有“被设计为可读”的文字语义单元</li><li>包括标题、标签、角落小字、密集小字、伪文字</li><li>检查乱码、扭曲、断裂、粘连与可直接验证的内部错误</li><li>不依赖正确文案或外部知识补全</li></ul><div class="stage">content.inventory.text<br>content.coverage.audit.text</div></div>
+        <div class="bridge">＋</div>
+        <div class="channel tone-art"><div class="icon">像</div><h3>Artifact channel</h3><ul><li>覆盖主要独立实体与语义完整的非文字区块</li><li>检查渲染、结构、拓扑、关系与物理错误</li><li>正常透视、遮挡、景深与轻微 AI 瑕疵不报</li><li>纯文字区域不会在本通道重复补充</li></ul><div class="stage">content.inventory.entity<br>content.coverage.audit.artifact</div></div>
+      </div>
+      <h3 style="margin-top:28px">覆盖账本示意</h3>
+      <div class="ledger"><table><thead><tr><th>语义区</th><th>通道</th><th>状态</th><th>含义</th></tr></thead><tbody>
+        <tr><td>主标题与副标题区</td><td>text</td><td><span class="state"><i class="dot"></i>checked</span></td><td>相关文字单元已检查</td></tr>
+        <tr><td>主标题与副标题区</td><td>artifact</td><td><span class="state"><i class="dot"></i>confirmed_empty</span></td><td>确认该区无独立非文字检查目标</td></tr>
+        <tr><td>主体人物区</td><td>artifact</td><td><span class="state"><i class="dot"></i>checked</span></td><td>主体及结构关系已检查</td></tr>
+        <tr><td>底部信息区</td><td>text</td><td><span class="state pending"><i class="dot"></i>pending</span></td><td>未核销；结果降为 uncertain / non-exhaustive</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="multiscale">
+      <h2>程序固定三视图，避免切图制造假问题</h2><p class="lead">模型看到的三张图由代码确定生成。细节裁剪只负责放大，不负责改变问题是否成立。</p>
+      <div class="views">
+        <div class="view"><div class="mock-image"></div><h3>图像 0 · 原图</h3><p>确认问题在完整语境中真实存在；最终坐标始终属于这张图。</p></div>
+        <div class="view context"><div class="mock-image"></div><h3>图像 1 · 上下文</h3><p>目标周围约 35% 扩展，并在接近语义区边界时保留完整区块。</p></div>
+        <div class="view detail"><div class="mock-image"></div><h3>图像 2 · 细节</h3><p>目标周围约 8% 扩展，必要时无损放大，帮助 27B 模型辨认小字和局部结构。</p></div>
+      </div>
+      <div class="gate" style="margin-top:20px">
+        <div>双确认硬门槛</div><div>若模型报告问题，必须同时返回 <code>confirmed_in_original=true</code> 与 <code>confirmed_in_context=true</code>；否则代码直接把候选改为无问题。</div>
+        <div>裁剪边界规则</div><div>断头词、半行文字、孤立数字、边缘残片不能仅因 crop 截断而被认作缺陷。</div>
+        <div>区域粒度</div><div>按可独立理解和一次重绘的语义单元检查，不固定 3×3，不把一行或几个词机械切碎。</div>
+      </div>
+    </section>
+
+    <section id="consensus">
+      <h2>Adversarial Consensus：发现、质疑、裁决</h2><p class="lead">同一个模型承担不同角色，但每一步拿到的任务、证据和输出约束不同；harness 用结构化状态约束其行为。</p>
+      <div class="grid3">
+        <div class="card"><span class="eyebrow">Proposer</span><h3>多角色提出候选</h3><p>结构/拓扑、关系/物理、渲染、文字覆盖四类角色并行提出候选。文字型发现即使来自 Artifact 角色，也会被重新路由到文字证据链。</p><div class="stage">consensus.propose<br>content.inspect.multiscale</div></div>
+        <div class="card"><span class="eyebrow">Skeptic</span><h3>逐候选挑战证据</h3><p>基于真实图像 crop 复核候选是否可见、类别是否合理、bbox 是否确实落在目标上，过滤把风格、遮挡和轻微瑕疵当问题的误报。</p><div class="stage">consensus.challenge</div></div>
+        <div class="card"><span class="eyebrow">Judge</span><h3>仅从已有候选裁决</h3><p>Judge 不能新造问题，只能选择已有、被支持的候选。角色说“有问题”但未形成有效候选时，结果保持 uncertain，不能错误降为 no_artifact。</p><div class="stage">consensus.judge</div></div>
+      </div>
+      <h3 style="margin-top:28px">候选进入最终整编前必须同时满足</h3>
+      <div class="grid4">
+        <div class="card"><h3>直接可见</h3><p><code>evidence_basis = visible_only</code></p></div>
+        <div class="card"><h3>足够明显</h3><p><code>materiality ∈ {major, critical}</code></p></div>
+        <div class="card"><h3>置信度门槛</h3><p><code>confidence &gt; 0.6</code>，0.6 本身也不接受。</p></div>
+        <div class="card"><h3>复核支持</h3><p><code>verification = supported</code></p></div>
+      </div>
+      <div class="non-goal" style="margin-top:18px"><h3>明确不检查</h3><ul><li>年份、日期、片名事实、世界知识、当前或未来事实</li><li>纯审美偏好、构图是否“更漂亮”、不影响主体的轻微 AI 瑕疵</li><li>无法从图中直接验证的目标文案或语言补全</li></ul></div>
+    </section>
+
+    <section id="consolidation">
+      <h2>在线整编：从 findings 变成 edit regions</h2><p class="lead">整编是正式 pipeline 内的一部分，不是跑完后人工或离线修结果。整编不新增诊断，只解决编辑目标划分与来源闭环。</p>
+      <div class="boxes">
+        <div class="box-demo bad"><div class="canvas"><div class="rect" style="left:8%;top:12%;width:84%;height:74%"><span>1</span></div><div class="rect" style="left:18%;top:28%;width:23%;height:28%"><span>2</span></div><div class="rect" style="left:52%;top:25%;width:19%;height:25%"><span>3</span></div><div class="rect" style="left:65%;top:59%;width:17%;height:17%"><span>4</span></div></div><h3>禁止：大框套小框</h3><p>大框覆盖多个已准确定位的独立问题，会让 edit 模型无法判断重绘目标，并可能破坏本来正常的区域。</p></div>
+        <div class="box-demo good"><div class="canvas"><div class="rect green" style="left:16%;top:24%;width:27%;height:35%"><span>1</span></div><div class="rect green" style="left:50%;top:22%;width:24%;height:31%"><span>2</span></div><div class="rect green" style="left:63%;top:57%;width:22%;height:23%"><span>3</span></div></div><h3>目标：独立、可重绘、略有冗余</h3><p>同一实体上的多个问题合进一个框与一组 issues；空间独立的实体分别保留。框覆盖完整编辑目标和必要上下文。</p></div>
+      </div>
+      <div class="grid3" style="margin-top:18px">
+        <div class="card"><h3>分层分批</h3><p>来源 finding 超过 10 条时先按空间/语义分批整编，再进行全图合并校验，降低 27B 模型一次处理过长列表的不稳定性。</p></div>
+        <div class="card"><h3>严格来源闭环</h3><p>每个 <code>source_finding_id</code> 必须恰好进入一个 region，或被 discard 且提供中文原因；禁止未知来源 ID。</p></div>
+        <div class="card"><h3>程序校验</h3><p>校验合法 bbox、明显性门槛、重复/嵌套、来源重复或遗漏；失败会进入在线 repair，而不是悄悄输出坏结果。</p></div>
+      </div>
+    </section>
+
+    <section id="taxonomy">
+      <h2>当前问题分类</h2><p class="lead">最终只聚焦两大域、六个可执行类别。</p>
+      <div class="taxonomy">
+        <div class="tax-group"><h3>D1 · Artifact</h3><p>非文字图像错误</p><div class="tax-list">
+          <div class="tax-item"><b>rendering_artifact</b><span>局部融化、边界破碎、重复纹理、材质/光照不连续</span></div>
+          <div class="tax-item"><b>structural_artifact</b><span>解剖或物体形态错误、部件缺失/重复、数量比例异常</span></div>
+          <div class="tax-item"><b>topology_artifact</b><span>错误融合、穿插、断裂、连接或遮挡顺序异常</span></div>
+          <div class="tax-item"><b>relational_physical_artifact</b><span>交互、支撑、重力、尺度、空间关系、阴影反射异常</span></div>
+        </div></div>
+        <div class="tax-group"><h3>D2 · Text Correctness</h3><p>文字正确性</p><div class="tax-list">
+          <div class="tax-item"><b>text_visual_integrity</b><span>乱码、伪文字、字形断裂/粘连/扭曲、缺笔、多笔、不可辨认</span></div>
+          <div class="tax-item"><b>text_content_fidelity</b><span>仅限图内能直接验证的明显漏字、多字、拼写或格式矛盾</span></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="protocol">
+      <h2>BBox 协议与正式输出</h2><p class="lead">只有 bbox 坐标使用整数 [0,1000]；不是把所有数值字段都归一化。所有阶段统一同一坐标语义。</p>
+      <div class="grid2">
+        <div class="card"><h3>坐标规范</h3><p><code>[x1, y1, x2, y2]</code>，左上角是 (0,0)，右下角是 (1000,1000)。模型输入输出、业务对象、trace、JSONL、整编与 HTML 均持久化为整数坐标。</p><div class="canvas" style="height:190px;margin-top:15px;background:#d6dfd8"><span style="position:absolute;left:9px;top:6px;font:12px monospace">(0,0)</span><span style="position:absolute;right:9px;bottom:6px;font:12px monospace">(1000,1000)</span><div class="rect green" style="left:24%;top:20%;width:47%;height:54%"><span>[240,200,710,740]</span></div></div></div>
+        <pre>{
+  <span class="key">"verdict"</span>: <span class="str">"artifact_present"</span>,
+  <span class="key">"edit_regions"</span>: [{
+    <span class="key">"edit_region_id"</span>: <span class="str">"r001"</span>,
+    <span class="key">"edit_target"</span>: <span class="str">"右侧蓝色标签"</span>,
+    <span class="key">"bbox_norm"</span>: [<span class="numc">612</span>, <span class="numc">355</span>, <span class="numc">778</span>, <span class="numc">469</span>],
+    <span class="key">"issues"</span>: [{
+      <span class="key">"artifact_type"</span>: <span class="str">"text_visual_integrity"</span>,
+      <span class="key">"description"</span>: <span class="str">"多处字形扭曲且无法辨认"</span>,
+      <span class="key">"materiality"</span>: <span class="str">"major"</span>
+    }],
+    <span class="key">"confidence"</span>: <span class="numc">0.86</span>,
+    <span class="key">"source_finding_ids"</span>: [<span class="str">"f017"</span>, <span class="str">"f021"</span>]
+  }]
+}</pre>
+      </div>
+    </section>
+
+    <section id="reliability">
+      <h2>重试、保守退出与正式失败</h2><p class="lead">目标是让 pipeline 自己完成链路；失败不能靠事后离线整编伪装成成功。</p>
+      <div class="retry"><span class="pill">单次模型请求：初次 + 2 次重试</span><span class="arrow">→</span><span class="pill">在线整编：初次 + 2 次重试</span><span class="arrow">→</span><span class="pill">完整工作单元：初次 + 2 次重跑</span><span class="arrow">→</span><span class="pill">仍失败则写 errors.jsonl</span></div>
+      <div class="grid3" style="margin-top:20px">
+        <div class="card"><h3>Coverage degraded / failed</h3><p>已发现的问题仍保留，但整体 verdict 降为 <code>uncertain</code>，置信度不高于 0.5，并标记 <code>findings_non_exhaustive=true</code>。</p></div>
+        <div class="card"><h3>在线整编 repair</h3><p>批内校验失败进入 <code>consolidate_repair</code>；分批合并冲突进入 <code>consolidate_global_repair</code>。repair 仍必须遵守来源闭环。</p></div>
+        <div class="card"><h3>Formal failure</h3><p>JSON/服务/整编校验在所有重试后仍失败，整张图记为 error，不生成貌似完成的正式 edit regions。</p></div>
+      </div>
+      <div class="failure"><strong>为什么不允许离线补结果？</strong><p>离线整编只能帮助临时人工审查，无法证明正式 pipeline 可以稳定走完全链路。V4.1 的成功定义是在线审查、裁决、整编、程序校验全部完成。</p></div>
+    </section>
+
+    <section id="stages">
+      <h2>可在 trace 中看到的主要阶段</h2><p class="lead">展开查看模型调用与代码责任边界。英文 stage 名保留，便于直接对照 JSONL trace。</p>
+      <details open><summary>1. 语义区与内容盘点</summary><div><ol class="stage-list"><li><code>content.zones.primary</code>：主语义布局区。</li><li><code>content.coverage.blind_inventory</code>：独立盲查分区。</li><li><code>content.inventory.text</code> / <code>content.inventory.entity</code>：双类内容清单；无内容须明确 <code>confirmed_empty</code>。</li><li><code>content.coverage.audit.text</code> / <code>.artifact</code>：独立查漏。</li><li><code>content.inventory.zone_recovery</code>：定向恢复未核销的 zone/channel。</li></ol></div></details>
+      <details><summary>2. 局部取证与候选形成</summary><div><ol class="stage-list"><li><code>content.inspect.multiscale</code>：原图、上下文、细节三视图检查。</li><li><code>consensus.propose</code>：Artifact 专家角色提出补充候选。</li><li>代码统一候选 ID、bbox 与明显性字段，并把文字候选路由到文字证据链。</li></ol></div></details>
+      <details><summary>3. 对抗共识</summary><div><ol class="stage-list"><li><code>consensus.challenge</code>：Skeptic 基于真实 crop 逐条反证。</li><li><code>consensus.judge</code>：Judge 仅接纳已有且有支持证据的候选。</li><li>代码应用 coverage gate：覆盖不完整时保持 uncertain，避免假阴性。</li></ol></div></details>
+      <details><summary>4. 在线结果整编</summary><div><ol class="stage-list"><li><code>consensus.consolidate</code>：按一次局部重绘目标整编。</li><li><code>consensus.consolidate_repair</code>：修复批内校验错误。</li><li><code>consensus.consolidate_global_repair</code>：修复分批合并后的重复、嵌套与来源闭环问题。</li><li>最终代码校验不过则正式失败，不静默降级。</li></ol></div></details>
+    </section>
+
+    <section id="status">
+      <h2>当前基线的实际验证状态</h2><p class="lead">下面是已完成运行，用于说明“当前实现已经验证到什么程度”，不等同于模型精度评测结论。</p>
+      <h3>30 张开发集 · 内部 27B 模型</h3>
+      <div class="metrics"><div class="metric"><strong>30</strong><span>输入图片</span></div><div class="metric"><strong>27</strong><span>在线全链路完成</span></div><div class="metric"><strong>3</strong><span>正式失败</span></div><div class="metric"><strong>V4.1</strong><span>人工复核认可为当前基线</span></div><div class="metric"><strong>0</strong><span>正式输出中的离线补结果</span></div></div>
+      <h3 style="margin-top:28px">211 张批量运行 · 内部 27B 模型</h3>
+      <div class="metrics"><div class="metric"><strong>210</strong><span>在线全链路完成</span></div><div class="metric"><strong>1</strong><span>嵌套整编校验失败</span></div><div class="metric"><strong>181</strong><span>coverage = ok</span></div><div class="metric"><strong>315</strong><span>最终 edit regions</span></div><div class="metric"><strong>7051</strong><span>持久化 bbox 全部合法</span></div></div>
+    </section>
+
+    <footer class="foot"><span>Critic Pipeline V4.1 · implementation-aligned guide</span><span>坐标、门控、阶段名均按当前代码整理</span></footer>
+  </div></main>
+</div>
+<script>
+  const links=[...document.querySelectorAll('nav a')];
+  const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-15% 0px -72% 0px'});
+  sections.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

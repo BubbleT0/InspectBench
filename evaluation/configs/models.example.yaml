@@ -1,0 +1,13 @@
+models:
+  local_critic:
+    adapter: openai_chat
+    endpoint: http://127.0.0.1:8000/v1/chat/completions
+    api_key_env: INSPECTBENCH_API_KEY
+    model: YOUR_SERVED_MODEL_NAME
+    timeout_seconds: 600
+    max_retries: 3
+    max_tokens: 32768
+    temperature: 0
+    rps: 0
+    image_max_side: null
+    image_jpeg_quality: 95

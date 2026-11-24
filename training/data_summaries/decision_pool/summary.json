@@ -1,0 +1,44 @@
+{
+  "seed": 20260824,
+  "variant": "c_all_unique",
+  "train": {
+    "rows": 20501,
+    "labels": {
+      "no_error": 13988,
+      "error": 6513
+    },
+    "sources": {
+      "clean_pinterest": 7111,
+      "error_v41_flash": 6413,
+      "clean_wikimedia": 6877,
+      "error_v41_hp": 100
+    },
+    "target_character_stats": {
+      "no_error": {
+        "samples": 13988,
+        "characters": 391664,
+        "mean_characters": 28.0
+      },
+      "error": {
+        "samples": 6513,
+        "characters": 2398916,
+        "mean_characters": 368.327
+      }
+    }
+  },
+  "validation": {
+    "rows": 800,
+    "labels": {
+      "no_error": 400,
+      "error": 400
+    },
+    "source_file": "/path/to/experiments/decision_sft/data/dev_4000_800/validation.jsonl"
+  },
+  "train_validation_image_overlap": 0,
+  "model_visible_columns": [
+    "messages",
+    "images"
+  ],
+  "repeat_time": 1.0,
+  "qc": false
+}

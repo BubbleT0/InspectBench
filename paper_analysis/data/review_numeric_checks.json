@@ -1,0 +1,76 @@
+{
+  "configurations": 17,
+  "direct_configurations": 11,
+  "pareto_configurations": [
+    "Decision-SFT",
+    "Decision-SFT-Balanced+",
+    "Decision-SFT-Pool+",
+    "Workflow-SFT / Full-Seq",
+    "Workflow-SFT / Full-Sched",
+    "Decision-SFT / Selective"
+  ],
+  "high_sensitivity_configurations": [
+    "Qwen3.6-27B",
+    "Qwen3.8-27B",
+    "Qwen3.7-Plus",
+    "Trajectory-SFT-R1",
+    "Trajectory-SFT-R2"
+  ],
+  "high_sensitivity_max_recall_01": 0.3333,
+  "minimum_no_overlap": 0.4397,
+  "maximum_spatial_reach": 0.5603,
+  "maximum_recall_01": 0.3379,
+  "maximum_recall_05": 0.2395,
+  "top_score_configuration": "Workflow-SFT / Full-Sched",
+  "always_flag_error": 0.3089509143407122,
+  "qwen36_recall_rank": 7,
+  "text_higher_than_artifact_count": 15,
+  "direct_selective_changes": {
+    "Trajectory-SFT-R2": {
+      "score": 3.653,
+      "clean_fpr": -0.3333,
+      "recall_01": -0.0075,
+      "recall_05": -0.0252
+    },
+    "Workflow-SFT": {
+      "score": 0.898,
+      "clean_fpr": 0.1122,
+      "recall_01": 0.0665,
+      "recall_05": 0.0293
+    },
+    "Decision-SFT": {
+      "score": 0.984,
+      "clean_fpr": 0.1527,
+      "recall_01": 0.058,
+      "recall_05": 0.0272
+    }
+  },
+  "single_region_no_penalty_thresholds": {
+    "0.1": {
+      "dice": 0.0372759372031494,
+      "iou": 0.018991939778856017
+    },
+    "0.5": {
+      "dice": 0.3714985722842371,
+      "iou": 0.22812296382529063
+    }
+  },
+  "top_three_score_intervals": [
+    [
+      "Workflow-SFT / Full-Sched",
+      30.066,
+      33.725
+    ],
+    [
+      "Workflow-SFT / Full-Seq",
+      29.81,
+      33.317
+    ],
+    [
+      "Decision-SFT / Selective",
+      29.718,
+      33.197
+    ]
+  ],
+  "note": "All derived from original configuration aggregates; no new model inference or raw-prediction evaluation."
+}

@@ -1,0 +1,35 @@
+{
+  "images": 1039,
+  "flawed": 718,
+  "clean": 321,
+  "regions": 1983,
+  "decoded_pixels_preserved": 1039,
+  "sources": {
+    "GPT-image-2": {
+      "images": 208,
+      "flawed": 97,
+      "clean": 111,
+      "regions": 266
+    },
+    "Public-4": {
+      "images": 499,
+      "flawed": 499,
+      "clean": 0,
+      "regions": 1126
+    },
+    "SenseNova-U1.5": {
+      "images": 222,
+      "flawed": 122,
+      "clean": 100,
+      "regions": 591
+    },
+    "Natural": {
+      "images": 110,
+      "flawed": 0,
+      "clean": 110,
+      "regions": 0
+    }
+  },
+  "image_bytes": 3160897871,
+  "metadata_policy": "Lossless removal of EXIF, comments and identifying text; color information preserved."
+}

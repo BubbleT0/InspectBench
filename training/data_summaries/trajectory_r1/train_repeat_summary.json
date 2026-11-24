@@ -1,0 +1,38 @@
+{
+  "meta": "/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/meta.json",
+  "repeat_map": "/path/to/experiments/trajectory_r1/data/stage5_swift/train_repeat_map.tsv",
+  "split": "train",
+  "shards": 4,
+  "original_records": 19396,
+  "effective_records": 19396,
+  "entries": [
+    {
+      "shard_name": "negative_v41_flash_50000_train",
+      "jsonl_path": "/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/negative_v41_flash_50000_train.jsonl",
+      "dataset_sample_N": 6122,
+      "orig_length": 6122,
+      "repeat_time": 1.0
+    },
+    {
+      "shard_name": "negative_v41_train",
+      "jsonl_path": "/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/negative_v41_train.jsonl",
+      "dataset_sample_N": 326,
+      "orig_length": 326,
+      "repeat_time": 1.0
+    },
+    {
+      "shard_name": "positive_pinterest_train",
+      "jsonl_path": "/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/positive_pinterest_train.jsonl",
+      "dataset_sample_N": 6579,
+      "orig_length": 6579,
+      "repeat_time": 1.0
+    },
+    {
+      "shard_name": "positive_wikimedia_train",
+      "jsonl_path": "/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/positive_wikimedia_train.jsonl",
+      "dataset_sample_N": 6369,
+      "orig_length": 6369,
+      "repeat_time": 1.0
+    }
+  ]
+}

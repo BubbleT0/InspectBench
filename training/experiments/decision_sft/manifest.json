@@ -1,0 +1,258 @@
+{
+  "exp": "critic_singlemodel_r123_8gpu_20260824",
+  "date": "2026-08-24",
+  "status": "r1_r3_formal_packed_queued",
+  "objective": "单模型视觉事实错误判定与错误框定位消融；降低无错图误报。",
+  "workflow": {
+    "skills": [
+      "agen-sft-pipeline",
+      "autotrain"
+    ],
+    "adaptation": "输入是 critic 图像监督数据而非 aGen agent trajectory，因此不执行 agentType/session/retry 专属阶段；保留 manifest、校验、RP 决策、转换、提交和记录检查点。",
+    "qc": {
+      "enabled": false,
+      "reason": "用户明确决定本轮不使用 GPT/VLM QC；以现有高精度 v4.1 与 v4.1-flash 标签进入消融。"
+    }
+  },
+  "data": {
+    "train_jsonl": "/path/to/experiments/decision_sft/data/dev_4000_800/train.jsonl",
+    "validation_jsonl": "/path/to/experiments/decision_sft/data/dev_4000_800/validation.jsonl",
+    "summary": "/path/to/experiments/decision_sft/data/dev_4000_800/summary.json",
+    "cache_dir": "/path/to/experiments/decision_sft/cache_full_common_v1",
+    "repeat_map": null,
+    "repeat_time": 1.0,
+    "packing": true,
+    "padding_free": true,
+    "split": {
+      "seed": 20260824,
+      "train_rows": 4000,
+      "validation_rows": 800,
+      "train_validation_image_overlap": 0,
+      "stratified_by_source_and_label": true
+    },
+    "source_files": {
+      "clean_wikimedia": "/path/to/storage/multimodal_data/research/images/image-noerror2/prefilter_candidates_vlm_judge_errors.jsonl",
+      "clean_pinterest": "/path/to/storage/multimodal_data/research/images/pinterest_tianbo/raw-27b/raw_pinterest_vlm_judge_errors.jsonl",
+      "error_v41_hp": "/path/to/storage/multimodal_data/research/images/image-error/output/v4.1/filtered_nontext_high_precision/images_with_errors_v4.1_high_precision_nontext.jsonl",
+      "error_v41_flash": "/path/to/storage/multimodal_data/research/images/image-error/output/v4.1_flash_50000/images_with_errors_v4.1_flash_50000.jsonl"
+    }
+  },
+  "model": "/path/to/checkpoints/workflow_sft",
+  "dependency_lock": "/path/to/experiments/decision_sft/dependency_lock.json",
+  "launch_script": "/path/to/experiments/decision_sft/scripts/submit_critic_r123_16gpu.sh",
+  "train_script": "/path/to/experiments/decision_sft/scripts/train_critic_r123_16gpu.sh",
+  "entry_script": "/path/to/experiments/decision_sft/scripts/critic_weighted_entry.py",
+  "env": {
+    "partition": "neo1-edit",
+    "container": "YOUR_TRAINING_IMAGE",
+    "python_env": "/path/to/storage/research/miniconda3/envs/swift",
+    "AOSS_CONF": "/path/to/storage/research/aoss.conf",
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True",
+    "IMAGE_MAX_TOKEN_NUM": 2048,
+    "MAX_PIXELS": 200704,
+    "SWIFT_USE_MCORE_GDN": 1
+  },
+  "hparams": {
+    "max_length": 8192,
+    "epochs": 1,
+    "lr_r1_r2": 1e-06,
+    "lr_r3": 5e-07,
+    "warmup_fraction": 0.2,
+    "global_batch_size": 8,
+    "micro_batch_size": 1,
+    "TP": 2,
+    "PP": 4,
+    "CP": 1,
+    "VPP": 2,
+    "DP": 2,
+    "nodes": 2,
+    "gpus_per_node": 8,
+    "freeze_vit": true,
+    "freeze_llm": false
+  },
+  "train_args": {
+    "save_safetensors": true,
+    "load_from_cache_file": true,
+    "loss_scale_by_variant": {
+      "r1": "default",
+      "r2": "critic_decision_v1",
+      "r3": "critic_decision_v1"
+    },
+    "enable_thinking": false,
+    "add_non_thinking_prefix": false,
+    "response_prefix": "",
+    "packing": true,
+    "padding_free": true,
+    "dataset_shuffle": false,
+    "val_dataset_shuffle": false,
+    "seed": 20260824,
+    "data_seed": 20260824,
+    "recompute_granularity": "full",
+    "recompute_method": "uniform",
+    "recompute_num_layers": 1,
+    "cross_entropy_loss_fusion": true,
+    "cross_entropy_fusion_impl": "te",
+    "packing_cp_align": false,
+    "eval_steps": 50,
+    "logging_steps": 1,
+    "save_steps": 50,
+    "dataloader_num_workers": 1,
+    "dataset_num_proc": 1,
+    "no_save_optim": true,
+    "no_save_rng": true,
+    "sequence_parallel": true,
+    "attention_backend": "flash",
+    "strict": false,
+    "truncation_strategy": "delete",
+    "vit_gradient_checkpointing": false,
+    "overlap_grad_reduce": true,
+    "overlap_param_gather": true,
+    "overlap_p2p_comm": true,
+    "variable_seq_lengths": true,
+    "report_to": "tensorboard"
+  },
+  "stages": {
+    "convert": {
+      "status": "completed",
+      "note": "已转换为仅暴露 messages/images 的 Swift 格式。"
+    },
+    "structured_qc": {
+      "status": "adapted_completed",
+      "note": "执行 critic 专用结构和来源字段审计；未使用 aGen session schema。"
+    },
+    "validate": {
+      "status": "completed",
+      "note": "4000/800 分层切分、图像零重叠、禁用来源与 generation prompt 标记。"
+    },
+    "qc": {
+      "status": "skipped_by_user"
+    },
+    "rp": {
+      "status": "completed",
+      "decision": "repeat_time=1.0，不上采样。"
+    },
+    "cache": {
+      "status": "completed",
+      "packing": false
+    },
+    "dependency_freeze": {
+      "status": "completed",
+      "path": "/path/to/experiments/decision_sft/deps/frozen_b8241e8_mg31e327_mb_c527134"
+    },
+    "import_smoke": {
+      "status": "passed",
+      "note": "两个计算节点均输出 IMPORT_SMOKE_OK；冻结依赖接口兼容。"
+    },
+    "optimizer_smoke": {
+      "status": "passed",
+      "variant": "r1_packed",
+      "train_iters": 2,
+      "packing": true,
+      "padding_free": true,
+      "use_validation": false,
+      "checkpoint": null,
+      "checkpoint_cleanup": "deleted_by_user_approval_2026-08-25; retained args.json, logging.jsonl and task logs"
+    },
+    "custom_loss_smoke": {
+      "status": "passed",
+      "variant": "r2_packed",
+      "train_iters": 2,
+      "packing": true,
+      "padding_free": true,
+      "loss_step_1": 0.47372591,
+      "loss_step_2": 0.44877881,
+      "peak_real_memory_gib": 48.48,
+      "checkpoint": null,
+      "checkpoint_cleanup": "deleted_by_user_approval_2026-08-25; retained args.json, logging.jsonl and task logs"
+    },
+    "r2_formal": {
+      "status": "completed",
+      "variant": "r2_formal_packed",
+      "epochs": 1,
+      "packing": true,
+      "padding_free": true,
+      "repeat_time": 1.0,
+      "loss_scale": "critic_decision_v1",
+      "learning_rate": 1e-06,
+      "save_steps": 50,
+      "eval_steps": 50,
+      "use_validation": true,
+      "train_steps": 136,
+      "eval_loss_50": 0.12266407,
+      "eval_loss_100": 0.10382508,
+      "eval_loss_136": 0.10241999,
+      "checkpoints": [
+        "/path/to/storage/multimodal_ckpt/research/autotrain/output/critic_singlemodel_r123_16gpu_20260824/r2_formal_packed8192_epoch1_lr1e6_16gpu_dp2/v1-20260825-191418/checkpoint-50",
+        "/path/to/storage/multimodal_ckpt/research/autotrain/output/critic_singlemodel_r123_16gpu_20260824/r2_formal_packed8192_epoch1_lr1e6_16gpu_dp2/v1-20260825-191418/checkpoint-100",
+        "/path/to/storage/multimodal_ckpt/research/autotrain/output/critic_singlemodel_r123_16gpu_20260824/r2_formal_packed8192_epoch1_lr1e6_16gpu_dp2/v1-20260825-191418/checkpoint-136"
+      ],
+      "note": "训练内 validation 只报告 teacher-forced loss；checkpoint 选择另行在 800 条分层验证集上做生成式 balanced accuracy 与 clean specificity 评测。"
+    },
+    "r1_formal": {
+      "status": "queued",
+      "variant": "r1_formal_packed",
+      "loss_scale": "default",
+      "learning_rate": 1e-06,
+      "epochs": 1,
+      "packing": true,
+      "padding_free": true,
+      "repeat_time": 1.0,
+      "save_steps": 50,
+      "eval_steps": 50
+    },
+    "r3_formal": {
+      "status": "queued",
+      "variant": "r3_formal_packed",
+      "loss_scale": "critic_decision_v1",
+      "learning_rate": 5e-07,
+      "epochs": 1,
+      "packing": true,
+      "padding_free": true,
+      "repeat_time": 1.0,
+      "save_steps": 50,
+      "eval_steps": 50
+    },
+    "experiments": {
+      "status": "diagnostic_in_progress",
+      "completed_or_failed_jobs": [
+        {
+          "variant": "r1_np2p",
+          "result": "entered backward but stayed at 0/2; stopped"
+        },
+        {
+          "variant": "r1_fixed",
+          "result": "failed during import because the shared dependency pair drifted"
+        },
+        {
+          "variant": "r1_fixed",
+          "result": "failed before optimizer smoke because bridge 765bbc8 forwarded input_ids to _forward_attention"
+        },
+        {
+          "variant": "r1_fixed",
+          "result": "both import gates passed; fixed 8192 entered backward but remained at 0/2 for over 15 minutes; stopped"
+        },
+        {
+          "variant": "r1_packed",
+          "result": "succeeded 2/2; checkpoint-2 complete; first step 392.5s including initialization, second step 8.01s"
+        },
+        {
+          "variant": "r2_packed",
+          "result": "succeeded 2/2; critic_decision_v1 metrics emitted; loss 0.47372591 -> 0.44877881; checkpoint-2 complete"
+        },
+        {
+          "variant": "r2_formal_packed",
+          "result": "succeeded 136/136; checkpoints 50/100/136 complete; final eval_loss 0.10241999"
+        }
+      ]
+    }
+  },
+  "eval": {
+    "selection_metrics": [
+      "balanced_accuracy",
+      "clean_specificity"
+    ],
+    "checkpoint_policy": "先满足无错特异度约束，再比较 balanced accuracy；bbox 指标单独报告。"
+  },
+  "output_root": "/path/to/storage/multimodal_ckpt/research/autotrain/output/critic_singlemodel_r123_16gpu_20260824",
+  "log_dir": "/path/to/experiments/decision_sft/logs/16gpu"
+}

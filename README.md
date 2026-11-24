@@ -1,142 +1,89 @@
 # InspectBench
 
-A benchmark for evaluating vision-language models as **image anomaly critics**:
-given an AI-generated (or natural) image, the model must (1) decide whether the
-image contains visual anomalies, and (2) localize every anomaly with a tight
-bounding box — while staying restrained on clean images.
+InspectBench evaluates **image-only defect coverage and false-positive restraint**. A critic receives an image without its generation prompt and returns localized defect regions, or an empty set for a clean image.
 
-This repository contains the full benchmark data (1,039 images with human
-ground-truth boxes) and a standalone, dependency-free scorer.
+The frozen paper benchmark contains **1,039 images, 718 flawed images, 321 clean controls and 1,983 reference regions**. This repository collects evaluation and inference code, the available inspection-pipeline implementations, recorded training configurations and data-preparation scripts, and all 17 saved prediction sets. A pixel-preserving image package has been prepared for Hugging Face; its upload and final dataset URL are pending account configuration. The original GitHub v1.0 image assets remain available in [Releases](https://github.com/BubbleT0/InspectBench/releases/tag/v1.0).
 
-## Why this benchmark
+## Contents
 
-Most anomaly-detection benchmarks evaluate only image-level yes/no judgments,
-or use a single strict IoU threshold that collapses all localization nuance
-into one bit. InspectBench instead measures a continuous localization quality
-per ground-truth box, explicitly handles the common "one big box covering
-several adjacent anomalies" behavior, penalizes duplicate and background boxes,
-and heavily weights restraint on clean images. The result is a single main
-score that cannot be gamed by either over- or under-triggering.
+| Directory | Contents |
+|---|---|
+| `benchmark/` | Final annotations, image-only input manifest, source statistics and image checksums |
+| `annotations/` | Original v1.0 subset files, retained for compatibility |
+| `scorer/` | Original published standalone scorer and annotation converter |
+| `evaluation/` | Direct model runner, adapters, prompts, metrics and tests |
+| `pipelines/` | Saved Full-Seq and inspection implementations, plus six recovered run configurations |
+| `training/` | Six checkpoint argument snapshots, training/preprocessing scripts, split manifests and dependency records |
+| `reproducibility/` | 17 predictions, reference scores, independently checked scorer and offline analyses |
+| `data_preparation/` | Final data selection, prescreening and offline review tools |
+| `paper_analysis/` | Paper table/figure generation code and frozen aggregate inputs |
+| `scripts/` | Dataset download, local-manifest preparation, export and integrity checks |
+| `docs/` | Scoring specification, taxonomy, provenance and limitations |
 
-## Data
+## Dataset
 
-| Subset | Images | Positive (anomalous) | Clean | GT boxes |
-| --- | ---: | ---: | ---: | ---: |
-| A | 208 | 97 | 111 | 266 |
-| B | 499 | 499 | 0 | 1,126 |
-| C | 141 | 122 | 19 | 591 |
-| D | 81 | 0 | 81 | 0 |
-| E | 110 | 0 | 110 | 0 |
-| **Total** | **1,039** | **718** | **321** | **1,983** |
+| Source | Images | Flawed | Clean | Regions |
+|---|---:|---:|---:|---:|
+| GPT-image-2 | 208 | 97 | 111 | 266 |
+| Public-4 | 499 | 499 | 0 | 1,126 |
+| SenseNova-U1.5 | 222 | 122 | 100 | 591 |
+| Natural | 110 | 0 | 110 | 0 |
+| Total | 1,039 | 718 | 321 | 1,983 |
 
-- Subsets A–C mix AI-generated imagery with annotated rendering, structural,
-  topology, relational/physical and text anomalies; D and E are clean-only
-  subsets for measuring false-positive restraint.
-- Annotation format (one JSON object per line, see `annotations/`):
-
-```json
-{
-  "sample_id": "IMG_0001",
-  "image_path": "images/IMG_0001.png",
-  "image_width": 2048,
-  "image_height": 3072,
-  "subset": "A",
-  "no_error": false,
-  "boxes": [
-    {"bbox_xywh": [1363.71, 1879.611, 96.0, 96.0],
-     "category": "artifact/structural",
-     "note": "human-language description of the anomaly"}
-  ]
-}
-```
-
-- `bbox_xywh` is `[x, y, w, h]` in absolute pixels, top-left origin.
-- Categories: `artifact/rendering`, `artifact/structural`, `artifact/topology`,
-  `artifact/relational_physical`, `text/visual_integrity`,
-  `text/content_fidelity`. Categories are diagnostic only — they never enter
-  the main score.
-
-## Task protocol
-
-The model receives the full image and a fixed instruction, and returns:
-
-```json
-{
-  "no_error": false,
-  "boxes": [
-    {"bbox_1000_xywh": [100.0, 200.0, 150.0, 120.0],
-     "family": "artifact/structural",
-     "description": "visible evidence of the anomaly"}
-  ]
-}
-```
-
-- `bbox_1000_xywh` is `[x, y, w, h]` normalized to a 0–1000 grid on both axes.
-- `family` and `description` are optional and diagnostic only.
-- Clean images should return `no_error: true` with an empty `boxes` list.
-
-## Scoring
-
-The scorer is a single file with **no third-party dependencies**
-(Python >= 3.9 standard library only): `scorer/bbox_scorer.py`.
-Full metric definitions and rationale: `scorer/README_SCORER.md`.
-
-### Quick start
+The dataset is an evaluation split. Clean controls are not content-matched to flawed images. Ground-truth boxes measure recovery of the retained, cross-reviewed annotations; they do not certify exhaustive defect annotation.
 
 ```bash
-# 1. merge the anonymized annotation subsets into scorer input format
-python scorer/prepare_annotations.py \
-    --annotations annotations/annotations_subset_*.jsonl \
-    --image-root . \
-    --output gt_merged.jsonl
+python -m pip install -r requirements-reproduction.txt
+# After the Hugging Face dataset URL is published, set its actual repository ID.
+python scripts/download_dataset.py \
+  --repo-id YOUR_HF_ACCOUNT/InspectBench --local-dir data/InspectBench
+python scripts/verify_release.py --dataset-root data/InspectBench --hash-images
+python scripts/prepare_local_dataset.py \
+  --dataset-root data/InspectBench --output-dir .local/benchmark
+```
 
-# 2. score a predictions file (same sample_ids as the annotations)
+Public IDs `IMG_0001` through `IMG_1039` match the existing GitHub release. Ground-truth `bbox_xywh` coordinates are absolute image pixels. Prediction `bbox_1000_xywh` coordinates use a 0-1000 grid. Image dimensions and decoded pixels are preserved; only identifying metadata and auxiliary MPO data are removed. See `docs/DATASET.md` for schema and version details.
+
+## Score saved or new predictions
+
+The original scorer needs only Python 3.9 or later:
+
+```bash
 python scorer/bbox_scorer.py \
-    --annotations gt_merged.jsonl \
-    --predictions your_predictions.jsonl \
-    --output metrics.json \
-    --per-sample-out per_sample.json \
-    --bootstrap 2000
+  --annotations benchmark/annotations.jsonl \
+  --predictions reproducibility/inputs/predictions/config_01.jsonl \
+  --output metrics.json --bootstrap 2000
 ```
 
-### The main score in one paragraph
+Run the independent specification tests and reproduce all offline analyses:
 
-Each ground-truth (GT) box elects exactly one owning prediction (highest
-coverage, tie-broken by base quality, then output order). A prediction that
-owns K >= 2 GTs is re-scored against their geometric union with a sqrt(K)-widened
-area tolerance, so tight merges are rewarded while blob boxes are not. Each GT
-receives a continuous quality in [0, 1] combining coverage, tightness (Dice)
-and a smooth area-ratio penalty; unmatched predictions earn zero credit. A
-positive image's score is the harmonic mean of soft precision and soft recall;
-a clean image scores exp(-N) for N predicted boxes. The headline is
-`100 * (0.7*sqrt(S_pos) + 0.3*sqrt(S_clean))^2`, where S_pos is the
-sqrt(#GT)-weighted mean over positive images and S_clean the mean over clean
-images.
-
-Key details (exact formulas, tie-breaking, failure handling) are documented in
-`scorer/README_SCORER.md` — including the area-tolerance curve
-`tau(f) = 1.25 + 0.35*exp(-f/0.01)`, the ownership tie-break order, and the
-policy that failed samples are scored as empty predictions (positive images
-get 0, clean images get 1 — always read together with the failure count).
-
-## Repository layout
-
-```
-annotations/            5 anonymized JSONL subset files (1,039 rows total)
-scorer/
-  bbox_scorer.py        standalone scorer (stdlib only)
-  prepare_annotations.py  converts the anonymized format to scorer input
-  README_SCORER.md      complete metric documentation
+```bash
+python -m unittest discover -s reproducibility/scorer -p 'test_scorer.py'
+python scripts/reproduce_paper_scores.py
+python reproducibility/analysis/analyze_existing.py
 ```
 
-The 1,039 benchmark images (`images/IMG_0001..IMG_1039`, ~2.9 GB) are **not
-stored in the git tree**. Download them from the repository's
-[Releases](../../releases) page: grab `InspectBench_images_part1.zip` and
-`InspectBench_images_part2.zip` and extract both archives into the repository
-root — they will create the `images/` directory with all files. Image
-metadata (EXIF, JPEG comments) has been stripped for anonymization.
+`reproducibility/inputs/configurations.json` maps files to the 17 paper configurations and unrounded reference scores. The analysis verifies score reproduction and computes ownership sensitivity, conventional matching, source strata, parameter sensitivity and paired bootstrap intervals. It invokes no model APIs. See `reproducibility/README.md` for statistical scope.
 
-## License / usage
+## Run models and inspect training records
 
-Released for research and double-blind review. The benchmark data is provided
-as-is for evaluation purposes.
+Direct inference requires Python 3.11 or later:
+
+```bash
+python -m pip install -e evaluation
+export INSPECTBENCH_API_KEY=YOUR_KEY
+python -m vlm_judge_bench run \
+  --annotations .local/benchmark/annotations.jsonl \
+  --models-config evaluation/configs/models.example.yaml \
+  --models local_critic --output-dir .local/runs/direct
+```
+
+Set the endpoint and served model name in the example configuration before running it. Credentials are read from environment variables. `pipelines/README.md` describes the saved procedures. `training/README.md` connects the six checkpoint snapshots to their data preparation and training files.
+
+Recorded training arguments are provided as evidence of the actual checkpoint settings. Training scripts retain framework and hardware assumptions; private infrastructure locations have been replaced with `/path/to/...` placeholders. This release does not include checkpoint weights or raw training conversations/images. It does not claim that copying a configuration recreates the historical training environment or proprietary model endpoints.
+
+## Interpretation and usage
+
+Report region recall and clean FPR alongside the composite score. The 0.1 cutoff is an area-penalized quality threshold, not IoU. Containment-first ownership can reduce credit after adding a broad box, and changing the clean/flawed weight can change rankings. Historical pipeline timings use 1,054-image batches and should not be treated as synchronized costs for the final 1,039-image evaluation.
+
+The existing release is provided as-is for research and evaluation. Third-party image rights remain with their respective owners; no blanket permissive license for source images is asserted. Source and release notes are in `docs/DATASET.md`.

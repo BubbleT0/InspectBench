@@ -1,0 +1,37 @@
+{
+  "counts": {
+    "images": 1039,
+    "flawed": 718,
+    "clean": 321,
+    "regions": 1983
+  },
+  "configuration_count": 17,
+  "review_flow": {
+    "candidates": 1429,
+    "first_pass": 820,
+    "corrected_retained": 219,
+    "discarded": 390,
+    "retained": 1039
+  },
+  "multi_region_images": 455,
+  "best_score_configuration": "0722_ck145 + v6",
+  "training_target_boxes": 4368,
+  "validation_target_boxes": 851,
+  "training_positive_mean": 2.184,
+  "validation_positive_mean": 2.1275,
+  "checks": {
+    "source_totals": true,
+    "flow_conservation": true,
+    "one_to_one_mapping": true,
+    "outcome_partition": true,
+    "score_component_rounding": true
+  },
+  "max_aggregate_rounding_residual": 0.0065139960327336155,
+  "scope": "Aggregate arithmetic only; original benchmark point estimates and intervals retained.",
+  "sha256": {
+    "summary_0917.csv": "2213861e081d5f86cefe548f1da3bdf756d1a11df3669c78b2e977947b01232a",
+    "annotation_0917_analysis.json": "f8be153afbef53b3140ada6320bc8f3861d6a76cf9e1ec935badd525f74ac54a",
+    "README_SCORER.md": "3897206c3d1109dd4333ad5f0112d35a46baa2b385fba178bf5d5882a7831d60",
+    "fig_pipeline.png": "66a9021d807df6f25486a95f557b28dfa8e8ab06ee905de5ccbaa445fa435584"
+  }
+}

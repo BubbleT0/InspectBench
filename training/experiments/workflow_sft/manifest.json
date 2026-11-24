@@ -1,0 +1,53 @@
+{
+  "exp": "agen_0722_agentv4_final",
+  "date": "2026-07-22 19:44:49",
+  "status": "STARTING",
+  "model": "/path/to/storage/multimodal_ckpt/model/Qwen3.6-27B",
+  "launch_script": "/path/to/storage/multimodal_ckpt/research/autotrain/ms-swift/shell/srun_train_agen_0722_agentv4_final.sh",
+  "train_script": "/path/to/storage/multimodal_ckpt/research/autotrain/ms-swift/shell/scripts/train_agen_0722_agentv4_final.sh",
+  "data": {
+    "meta_swift": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/meta.json",
+    "swift_dir": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/data",
+    "train_data_dir": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/data",
+    "repeat_map": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/repeat_map.tsv",
+    "summary": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/summary.json",
+    "token_stats": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/token_stats_qwen36_27b.json",
+    "cache_dir": "/path/to/storage/multimodal_ckpt/research/autotrain/cache/data/sft_agen_0722_agentv4_final"
+  },
+  "env": {
+    "EXP_SUFFIX": "agen_0722_agentv4_final_rp_3ep",
+    "DATA_DIR_OVERRIDE": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/data",
+    "CACHE_DIR_OVERRIDE": "/path/to/storage/multimodal_ckpt/research/autotrain/cache/data/sft_agen_0722_agentv4_final",
+    "REPEAT_MAP_TSV": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/repeat_map.tsv",
+    "PACK_PARALLEL_SHARDS": "8",
+    "PACK_NUM_PROC_PER_SHARD": "8"
+  },
+  "hparams": {
+    "max_length": 131072,
+    "epochs": 3,
+    "lr": "2e-5",
+    "min_lr": "1e-6",
+    "warmup": 0.1,
+    "global_batch_size": 64,
+    "micro_batch_size": 1,
+    "TP": 2,
+    "PP": 4,
+    "CP": 4,
+    "VPP": 2,
+    "EP": 1,
+    "ETP": 1,
+    "nodes": 8
+  },
+  "stages": {
+    "convert": "complete: 0715 + 0716/0717 + 0721, 27 Swift shards",
+    "validate": "complete: OpenAI and Swift validation 0 errors",
+    "structured_qc": "complete: retry/repair/fallback/schema/artifact/error records removed",
+    "rp": "0715 default=1 agen=2; 0716/0717 default=1 agen=2; 0721 default=3 agen=4; 8834 -> 12312",
+    "token_count": "Qwen3.6-27B exact template: p99=106444, p99.9=123144, max=138949; 4 records exceed 131072",
+    "packing": "pending"
+  },
+  "data_note": "Cleaned agentv4 backflow from 0715, 0716/0717 and 0721. The 0721 batch is upweighted because it is closest to the final workflow version. 8834 original records, 12312 repeat-weighted records, no duplicate session ids.",
+  "log_dir": "/path/to/storage/multimodal_ckpt/research/autotrain/logs/neo_agentic_qwen36_27b_agen_0722_agentv4_final_20260722_194446",
+  "model_out": "/path/to/storage/multimodal_ckpt/research/autotrain/output/Qwen3.6-27B_TP2_CP4_PP4_VPP2_EP1_ETP1_mbs1_131072_agen_0722_agentv4_final_rp_3ep",
+  "eval": "pending"
+}

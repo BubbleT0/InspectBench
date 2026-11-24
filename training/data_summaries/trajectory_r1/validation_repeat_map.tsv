@@ -1,0 +1,5 @@
+shard_name	jsonl_path	dataset_sample_N	orig_length	repeat_time
+negative_v41_flash_50000_validation	/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/negative_v41_flash_50000_validation.jsonl	340	340	1.0
+negative_v41_validation	/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/negative_v41_validation.jsonl	18	18	1.0
+positive_pinterest_validation	/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/positive_pinterest_validation.jsonl	366	366	1.0
+positive_wikimedia_validation	/path/to/experiments/trajectory_r1/data/stage5_swift/data_swift_format/positive_wikimedia_validation.jsonl	354	354	1.0

@@ -1,0 +1,29 @@
+{
+  "source": "summary_0917.csv; annotation_0917_analysis.json; annotation_review_flow.csv",
+  "images": 1039,
+  "defect_regions": 1983,
+  "clean_controls": 321,
+  "candidates": 1429,
+  "retention_pct": 72.70818754373688,
+  "configurations": 17,
+  "highest_headline_configuration": "Workflow-SFT / Full-Sched",
+  "highest_headline_score": 31.895,
+  "maximum_recall_at_quality_01_pct": 33.79,
+  "full_selective_same_checkpoint": {
+    "full_configuration": "Workflow-SFT / Full-Sched",
+    "selective_configuration": "Workflow-SFT / Selective",
+    "score_difference": 2.4890000000000008,
+    "clean_fpr_reduction_percentage_points": 8.100000000000001,
+    "full_no_overlap_region_pct": 46.75
+  },
+  "trajectory_selective_vs_direct": {
+    "checkpoint": "Trajectory-SFT-R2",
+    "clean_fpr_change_percentage_points": -33.330000000000005
+  },
+  "decision_selective_vs_direct": {
+    "checkpoint": "Decision-SFT",
+    "clean_fpr_change_percentage_points": 15.27
+  },
+  "calculations_use_exported_rounded_values": true,
+  "new_experiment": false
+}

@@ -1,0 +1,82 @@
+{
+  "meta": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/meta.json",
+  "repeat_map": "/path/to/storage/multimodal_data/research/agen/0715_0716_0717_0721_combined_rp_v1/repeat_map.tsv",
+  "policy": {
+    "0715": {
+      "default": 1,
+      "agen": 2
+    },
+    "0716_0717": {
+      "default": 1,
+      "agen": 2
+    },
+    "0721": {
+      "default": 3,
+      "agen": 4
+    }
+  },
+  "datasets": 27,
+  "original_records": 8834,
+  "effective_records": 12312,
+  "records_by_batch": {
+    "0715": 2432,
+    "0716_0717": 5055,
+    "0721": 1347
+  },
+  "effective_records_by_batch": {
+    "0715": 2824,
+    "0716_0717": 5394,
+    "0721": 4094
+  },
+  "records_by_agent": {
+    "agen_designer": 2559,
+    "agen_json": 1593,
+    "agen_researcher": 2628,
+    "agen_shell": 47,
+    "agen": 784,
+    "backdrop_artist": 135,
+    "panel_illustrator": 879,
+    "storyboard_scripter": 182,
+    "storyboard_verifier": 27
+  },
+  "effective_records_by_agent": {
+    "agen_designer": 3293,
+    "agen_json": 2121,
+    "agen_researcher": 3778,
+    "agen_shell": 63,
+    "agen": 1674,
+    "backdrop_artist": 177,
+    "panel_illustrator": 931,
+    "storyboard_scripter": 240,
+    "storyboard_verifier": 35
+  },
+  "source_annotations": {
+    "0715_agen_agen_designer_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_designer_success.jsonl",
+    "0715_agen_agen_json_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_json_success.jsonl",
+    "0715_agen_agen_researcher_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_researcher_success.jsonl",
+    "0715_agen_agen_shell_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_shell_success.jsonl",
+    "0715_agen_agen_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_success.jsonl",
+    "0715_agen_backdrop_artist_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_backdrop_artist_success.jsonl",
+    "0715_agen_panel_illustrator_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_panel_illustrator_success.jsonl",
+    "0715_agen_storyboard_scripter_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_storyboard_scripter_success.jsonl",
+    "0715_agen_storyboard_verifier_success": "/path/to/storage/multimodal_data/research/agen/0715_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_storyboard_verifier_success.jsonl",
+    "0716_0717_agen_agen_designer_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_agen_designer_success.jsonl",
+    "0716_0717_agen_agen_json_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_agen_json_success.jsonl",
+    "0716_0717_agen_agen_researcher_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_agen_researcher_success.jsonl",
+    "0716_0717_agen_agen_shell_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_agen_shell_success.jsonl",
+    "0716_0717_agen_agen_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_agen_success.jsonl",
+    "0716_0717_agen_backdrop_artist_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_backdrop_artist_success.jsonl",
+    "0716_0717_agen_panel_illustrator_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_panel_illustrator_success.jsonl",
+    "0716_0717_agen_storyboard_scripter_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_storyboard_scripter_success.jsonl",
+    "0716_0717_agen_storyboard_verifier_success": "/path/to/storage/multimodal_data/research/agen/0716_0717_structured_qc_v2/agent_data_pipeline_main_v3/data_swift_format/agen_storyboard_verifier_success.jsonl",
+    "0721_agen_agen_designer_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_designer_success.jsonl",
+    "0721_agen_agen_json_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_json_success.jsonl",
+    "0721_agen_agen_researcher_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_researcher_success.jsonl",
+    "0721_agen_agen_shell_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_shell_success.jsonl",
+    "0721_agen_agen_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_agen_success.jsonl",
+    "0721_agen_backdrop_artist_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_backdrop_artist_success.jsonl",
+    "0721_agen_panel_illustrator_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_panel_illustrator_success.jsonl",
+    "0721_agen_storyboard_scripter_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_storyboard_scripter_success.jsonl",
+    "0721_agen_storyboard_verifier_success": "/path/to/storage/multimodal_data/research/agen/0721_structured_qc_v1/agent_data_pipeline_main_v1/data_swift_format/agen_storyboard_verifier_success.jsonl"
+  }
+}

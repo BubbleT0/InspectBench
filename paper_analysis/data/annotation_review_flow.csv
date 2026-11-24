@@ -1,0 +1,5 @@
+source_key,source,candidates,first_pass,corrected_retained,discarded,retained,first_pass_rate,retention_rate
+gpt,GPT-image-2,242,182,26,34,208,0.7520661157024794,0.859504132231405
+external4,Public-4,712,384,115,213,499,0.5393258426966292,0.7008426966292135
+sensenova_u1_5,SenseNova-U1.5,350,152,70,128,222,0.4342857142857143,0.6342857142857142
+natural_clean_110,Natural clean,125,102,8,15,110,0.816,0.88

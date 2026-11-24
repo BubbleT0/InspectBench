@@ -1,0 +1,200 @@
+{
+  "exp": "critic_full_4src_16gpu_neo1_trajectory_20260819",
+  "stages": {
+    "stage0_audit": {
+      "status": "complete",
+      "all_source_rows": 21828,
+      "selected_by_structural_gate": 21307,
+      "positive_no_error": 14388,
+      "negative_error_localized": 6919,
+      "old_negative_high_precision_kept": 117,
+      "old_negative_rejected_without_high_precision_localization": 521,
+      "images_checked": 21307,
+      "invalid_images": 0,
+      "duplicate_identity_groups": 0,
+      "semantic_qc_complete": false,
+      "summary": "/path/to/experiments/trajectory_r2/data/stage0_audit/audit_summary.json"
+    },
+    "stage1_openai": {
+      "status": "complete",
+      "rows": 21307,
+      "shards": 12,
+      "train": 19175,
+      "validation": 1066,
+      "test": 1066,
+      "split": "stratified_by_source_and_label",
+      "seed": 20260819,
+      "output": "/path/to/experiments/trajectory_r2/data/stage1_openai_v2"
+    },
+    "stage1_5_structured_qc": {
+      "status": "complete",
+      "input_rows": 21307,
+      "output_rows": 21307,
+      "dropped": 0,
+      "shards": 12,
+      "semantic_qc": "waived_by_user",
+      "output": "/path/to/experiments/trajectory_r2/data/stage1_5_structured_qc_v2"
+    },
+    "stage2_media_normalization": {
+      "status": "complete",
+      "rows": 21307,
+      "normalized_media": 21307,
+      "existing_media": 21307,
+      "root": "/path/to/storage",
+      "output": "/path/to/experiments/trajectory_r2/data/stage2_input_v3"
+    },
+    "stage2_validate": {
+      "status": "complete",
+      "datasets": 12,
+      "records": 21307,
+      "valid_records": 21307,
+      "errors": 0,
+      "reasoning_ratio": 1.0,
+      "output": "/path/to/experiments/trajectory_r2/data/stage2_validate_v3"
+    },
+    "failed_attempts": [
+      {
+        "stage": "structured_qc",
+        "reason": "flat shard layout was not discovered by critic/*.jsonl scanner",
+        "accepted": false
+      },
+      {
+        "stage": "validate",
+        "reason": "structured-QC list meta incompatible with validator dict schema",
+        "accepted": false
+      },
+      {
+        "stage": "validate",
+        "reason": "absolute media paths rejected; fixed in new root-relative stage2_input_v3",
+        "accepted": false
+      }
+    ],
+    "rp_checkpoint": {
+      "status": "approved",
+      "train_positive": 12948,
+      "train_negative": 6227,
+      "negative_repeat_time": 2.0,
+      "effective_train_positive": 12948,
+      "effective_train_negative": 12454,
+      "effective_train_total": 25402,
+      "validation_test_repeat_time": 1.0
+    },
+    "stage5_swift": {
+      "status": "complete",
+      "datasets": 12,
+      "input_records": 21307,
+      "written_records": 21307,
+      "skipped_records": 0,
+      "conversion_errors": 0,
+      "swift_validation_errors": 0
+    },
+    "tooling": {
+      "agent_data_tools_version": "1.0.1",
+      "isolated_update_attempt": "aborted_before_download_due_to_AFS_venv_creation_stall",
+      "fallback": "pinned version that passed both OpenAI and Swift validation"
+    },
+    "launch_preflight": {
+      "status": "complete",
+      "train_script_sha256": "55a2236eaca90e4470fe6ae7a951636015cedd6e7e7694e5cce1c41c1a8a2036",
+      "submit_script_sha256": "f39adb64bd067ef7a6ac8cfbf06421cc15c7c8e41912af97085aa6b0a70f33e5",
+      "repeat_map_train_shards": 4,
+      "effective_train_records": 25402
+    },
+    "launch": {
+      "status": "STARTING",
+      "submitted_at_utc": "2026-08-19T12:08:09Z",
+      "partition": "neo1-trajectory",
+      "framework": "PYTORCH_DDP",
+      "priority": "NORMAL",
+      "worker_nodes": 2,
+      "total_gpus": 16
+    },
+    "launch_neo1_edit": {
+      "status": "STARTING",
+      "submitted_at_utc": "2026-08-20T03:06:10Z",
+      "partition": "neo1-edit",
+      "framework": "PYTORCH_DDP",
+      "priority": "NORMAL",
+      "worker_nodes": 2,
+      "total_gpus": 16,
+      "cache_dir": "/path/to/experiments/trajectory_r2/cache/critic_train_8192_rp2_neo1_edit",
+      "log_dir": "/path/to/experiments/trajectory_r2/logs/neo1_edit",
+      "output_dir": "/path/to/experiments/trajectory_r2/output/full_16gpu_tp2_pp4_cp1_dp2_rp2_epoch1_gbs8_neo1_edit",
+      "train_script_sha256": "0359c0ca3db0c77cc6d67e42650d0216f8bb064c8d3669e1eac5f8efa7584c99",
+      "submit_script_sha256": "629314ed7eb68fa3717db3583ff2d6b39032f2ad4d9f31518b777ba541aafc02"
+    },
+    "launch_neo1_trajectory_stop": {
+      "partition": "neo1-trajectory",
+      "status": "SUSPENDED",
+      "start_time": null,
+      "reason": "user requested cancellation after neo1-edit began running"
+    },
+    "train_neo1_edit": {
+      "partition": "neo1-edit",
+      "status": "RUNNING",
+      "start_time_utc": "2026-08-20T05:24:35Z",
+      "packing_shards": 4,
+      "iteration": 224,
+      "total_iterations": 1001,
+      "latest_loss": 0.28933951,
+      "latest_iter_time_s": 7.73
+    }
+  },
+  "data": {
+    "sources": {
+      "positive_noerror": [
+        "/path/to/storage/multimodal_data/research/images/image-noerror2/prefilter_candidates_vlm_judge_errors.jsonl",
+        "/path/to/storage/multimodal_data/research/images/pinterest_tianbo/raw-27b/raw_pinterest_vlm_judge_errors.jsonl"
+      ],
+      "negative_error": [
+        "/path/to/storage/multimodal_data/research/images/image-error/output/images_without_errors.jsonl",
+        "/path/to/storage/multimodal_data/research/images/image-error/output/v4.1_flash_50000/images_with_errors_v4.1_flash_50000.jsonl"
+      ]
+    },
+    "meta_openai": "/path/to/experiments/trajectory_r2/data/stage4_rp/meta_middle_format.json",
+    "meta_swift": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format/meta.json",
+    "swift_dir": "/path/to/experiments/trajectory_r2/data/stage5_swift/data_swift_format",
+    "repeat_map": "/path/to/experiments/trajectory_r2/data/stage5_swift/repeat_map.tsv",
+    "cache_dir": "/path/to/experiments/trajectory_r2/cache/critic_train_8192_rp2"
+  },
+  "env": {
+    "workspace_type": "multimodal",
+    "partition": "neo1-trajectory",
+    "framework": "pytorch",
+    "worker_spec": "N6lS.Iu.I80.8.64c1024g",
+    "worker_nodes": 2,
+    "total_gpus": 16
+  },
+  "hparams": {
+    "training": "full_parameter_sft",
+    "num_train_epochs": 1,
+    "max_length": 8192,
+    "lr": 1e-06,
+    "min_lr": 1e-07,
+    "warmup_fraction": 0.2,
+    "micro_batch_size": 1,
+    "global_batch_size": 8,
+    "TP": 2,
+    "PP": 4,
+    "CP": 1,
+    "VPP": 2,
+    "EP": 1,
+    "ETP": 1,
+    "DP": 2,
+    "nodes": 2,
+    "gpus_per_node": 8,
+    "total_gpus": 16,
+    "freeze_llm": false,
+    "freeze_vit": true,
+    "save_steps": 500,
+    "save_safetensors": true,
+    "save_optimizer": false,
+    "max_pixels": 200704
+  },
+  "status": "RUNNING_NEO1_EDIT",
+  "model": "/path/to/checkpoints/workflow_sft",
+  "launch_script": "/path/to/experiments/trajectory_r2/scripts/submit_critic_full_16gpu_rp2_epoch1.sh",
+  "train_script": "/path/to/experiments/trajectory_r2/scripts/train_critic_full_16gpu_rp2_epoch1.sh",
+  "log_dir": "/path/to/experiments/trajectory_r2/logs",
+  "output_dir": "/path/to/experiments/trajectory_r2/output/full_16gpu_tp2_pp4_cp1_dp2_rp2_epoch1_gbs8"
+}

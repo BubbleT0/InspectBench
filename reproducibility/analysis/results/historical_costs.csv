@@ -1,0 +1,4 @@
+procedure,images,successes,failures,requests,wall_seconds,max_in_flight,max_images_in_flight,image_timing_method,requests_per_image
+Full-Seq,1054,1033,21,54495,40253.167968034744,64,32,trace_request_span_estimate,51.70303605313093
+Full-Sched,1054,1052,2,27817,13277.231175377965,64,32,native_unit_total_elapsed_seconds,26.391840607210625
+Selective,1054,1054,0,15776,6209.772310659289,64,32,native_unit_total_elapsed_seconds,14.96774193548387

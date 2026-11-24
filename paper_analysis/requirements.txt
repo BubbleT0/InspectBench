@@ -1,0 +1,5 @@
+# Only needed to regenerate statistical figures or run PDF validation.
+# LaTeX compilation and the scorer do not depend on these packages.
+matplotlib>=3.7
+numpy>=1.24
+PyMuPDF>=1.23

@@ -1,0 +1,30 @@
+{
+  "scope": "Decision-SFT 4000 train / 800 validation only; does not certify other checkpoint datasets or pretraining",
+  "counts": {
+    "train": 4000,
+    "validation": 800,
+    "benchmark": 1039
+  },
+  "readable": {
+    "train": 4000,
+    "validation": 800,
+    "benchmark": 1039
+  },
+  "matches": {
+    "train_vs_validation": {
+      "path_sha256": [],
+      "file_sha256": []
+    },
+    "train_vs_benchmark": {
+      "path_sha256": [],
+      "file_sha256": []
+    },
+    "validation_vs_benchmark": {
+      "path_sha256": [],
+      "file_sha256": []
+    }
+  },
+  "near_duplicate_candidates": [],
+  "phash_method": "EXIF-transposed grayscale 32x32 LANCZOS; orthonormal DCT-II; top 8x8 excluding DC; median-threshold 63 bits; Hamming <=4; candidates require visual adjudication",
+  "manifest_sha256": "cafae8099213b61bd826b1ab758ce112b28fa5e9d2f4cd5c429c17c7ed4f4c66"
+}

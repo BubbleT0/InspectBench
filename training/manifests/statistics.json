@@ -1,0 +1,27 @@
+{
+  "decision_sft": {
+    "train": 4000,
+    "validation": 800
+  },
+  "decision_balanced": {
+    "train": 13026,
+    "validation": 800
+  },
+  "decision_pool": {
+    "train": 20501,
+    "validation": 800
+  },
+  "trajectory_r1": {
+    "test": 1078,
+    "train": 19396,
+    "validation": 1078
+  },
+  "trajectory_r2": {
+    "test": 1066,
+    "train": 19175,
+    "validation": 1066
+  },
+  "workflow_sft": {
+    "train": 8834
+  }
+}
