@@ -2,7 +2,7 @@
 
 InspectBench evaluates **image-only defect coverage and false-positive restraint**. A critic receives an image without its generation prompt and returns localized defect regions, or an empty set for a clean image.
 
-The frozen paper benchmark contains **1,039 images, 718 flawed images, 321 clean controls and 1,983 reference regions**. This repository collects evaluation and inference code, the available inspection-pipeline implementations, recorded training configurations and data-preparation scripts, and all 17 saved prediction sets. A pixel-preserving image package has been prepared for Hugging Face; its upload and final dataset URL are pending account configuration. The original GitHub v1.0 image assets remain available in [Releases](https://github.com/BubbleT0/InspectBench/releases/tag/v1.0).
+The frozen paper benchmark contains **1,039 images, 718 flawed images, 321 clean controls and 1,983 reference regions**. This repository collects evaluation and inference code, the available inspection-pipeline implementations, recorded training configurations and data-preparation scripts, and all 17 saved prediction sets. The pixel-preserving benchmark images and annotations are available on [Hugging Face](https://huggingface.co/datasets/BubbleT0/InspectBench). The original GitHub v1.0 image assets remain available in [Releases](https://github.com/BubbleT0/InspectBench/releases/tag/v1.0).
 
 ## Contents
 
@@ -34,9 +34,8 @@ The dataset is an evaluation split. Clean controls are not content-matched to fl
 
 ```bash
 python -m pip install -r requirements-reproduction.txt
-# After the Hugging Face dataset URL is published, set its actual repository ID.
 python scripts/download_dataset.py \
-  --repo-id YOUR_HF_ACCOUNT/InspectBench --local-dir data/InspectBench
+  --repo-id BubbleT0/InspectBench --local-dir data/InspectBench
 python scripts/verify_release.py --dataset-root data/InspectBench --hash-images
 python scripts/prepare_local_dataset.py \
   --dataset-root data/InspectBench --output-dir .local/benchmark

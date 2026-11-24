@@ -36,6 +36,8 @@ The export removes EXIF, text/comment metadata and auxiliary MPO data without re
 
 ## Hugging Face layout
 
+Published dataset: [BubbleT0/InspectBench](https://huggingface.co/datasets/BubbleT0/InspectBench). The verified dataset commit is `d77653271dec8803198fc5183ce4ede5d4f5d640`; pass it as `--revision` to `scripts/download_dataset.py` to pin this release. The machine-readable record is `benchmark/huggingface_release.json`.
+
 `images/metadata.jsonl` adds source metadata and objects to the image files using the standard [ImageFolder format](https://huggingface.co/docs/datasets/en/image_dataset). The dataset card declares a single `test` split. Each `objects` value contains parallel lists `bbox_xywh`, `category` and `description`; clean images have empty lists.
 
 ## Scope

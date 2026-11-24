@@ -1,0 +1,8 @@
+{
+  "repo_id": "BubbleT0/InspectBench",
+  "url": "https://huggingface.co/datasets/BubbleT0/InspectBench",
+  "commit": "d77653271dec8803198fc5183ce4ede5d4f5d640",
+  "verified_expected_images": 1039,
+  "verified_remote_image_sha256": 1039,
+  "regions": 1983
+}
