@@ -91,6 +91,19 @@ class InputManifestTests(unittest.TestCase):
         finally:
             outside.unlink(missing_ok=True)
 
+    def test_mislabeled_png_uses_png_mime_in_both_loading_routes(self) -> None:
+        from PIL import Image
+
+        path = self.root / "historical.jpg"
+        Image.new("RGB", (4, 3)).save(path, format="PNG")
+        selection = self.root / "selection.jsonl"
+        selection.write_text(json.dumps({"image_absolute_path": str(path)}) + "\n")
+        discovered = next(r for r in discover_images(self.root) if r.source_path == path)
+        loaded = load_images_from_jsonl(selection)[0]
+        self.assertEqual(discovered.mime_type, "image/png")
+        self.assertEqual(loaded.mime_type, "image/png")
+        self.assertEqual(to_image_asset(loaded).data, path.read_bytes())
+
 
 if __name__ == "__main__":
     unittest.main()

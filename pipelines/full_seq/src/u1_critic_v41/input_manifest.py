@@ -13,6 +13,19 @@ from critic_workflows import ImageAsset
 SUPPORTED_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
 
 
+def image_mime_type(path: Path) -> str:
+    """Keep historical filenames while identifying the actual encoded image."""
+    with path.open("rb") as handle:
+        header = handle.read(12)
+    if header.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "image/png"
+    if header.startswith(b"\xff\xd8\xff"):
+        return "image/jpeg"
+    if header.startswith(b"RIFF") and header[8:12] == b"WEBP":
+        return "image/webp"
+    return mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+
+
 @dataclass(frozen=True)
 class ImageRecord:
     image_id: str
@@ -29,7 +42,7 @@ def discover_images(root: Path) -> list[ImageRecord]:
             continue
         relative = path.relative_to(resolved)
         digest = hashlib.sha256(relative.as_posix().encode("utf-8")).hexdigest()[:12]
-        mime_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+        mime_type = image_mime_type(path)
         records.append(
             ImageRecord(
                 image_id=f"img_{digest}",
@@ -129,10 +142,7 @@ def load_images_from_jsonl(
                     image_id=image_id,
                     source_path=source_path,
                     reference_label="",
-                    mime_type=(
-                        mimetypes.guess_type(source_path.name)[0]
-                        or "application/octet-stream"
-                    ),
+                    mime_type=image_mime_type(source_path),
                 )
             )
     if not selected:
